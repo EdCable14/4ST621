@@ -1,0 +1,20 @@
+---
+title: "Course Introduction"
+author: "Adam Cabla"
+---
+
+Welcome to the course 4ST621 -- Probability Theory and Mathematical Statistics I.
+
+As the name suggests, this course has two main parts. So, what is the difference between probability and statistics?
+
+In probability theory, we deal with the following question: Given some assumptions about the generating process, what can we say about (possible) data?
+
+In (inferential) statistics, we ask quite the opposite question: Given the data, what can we say about the (possible) generating process?  
+
+In the first (longer) part, we will start with some basic terms and operations used upon probabilities, which will lead us to the Bayes theorem, a potent tool for thinking about data. Then, we will move to random variables, distributing probabilities among real numbers and what characteristics can come from these distributions. Generalising into two dimensions, we will also add problematics of relations between random variables. Then, with some general ideas in mind, we will move to specific probability distributions, or probabilistic models, arising from various assumptions. This tour is finished with stochastic convergences, which provide reasoning machinery for inferential statistics, connecting it with the probability theory.
+
+In the second (shorter) part, we will start with the basics of sampling -- how data come into existence and how we can use stochastic convergences or some other assumptions to model the probability distribution of various statistics. We will make a slight detour into the area of point estimates to cover important notions of estimators' variability and bias. After this, we will return to the sampling theory and see how to use it to test various claims about the generating process. Hypothesis testing is an essential tool in the statistical bag if done correctly, which is not so easy without understanding some basic and often overlooked philosophical connections. To finish the course, we will introduce confidence intervals, which are dual to hypothesis testing but bring additional information.
+
+This course is by no means a complete treatise on the subjects outlined in the previous paragraphs. It is rather an introductory, sometimes more and sometimes less comprehensive, into the topics.
+
+Please avoid falling into the Dunning-Kruger-like trap of being overconfident after learning the basics.

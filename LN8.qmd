@@ -1,0 +1,158 @@
+---
+title: "Stochastic convergences"
+author: "Adam Cabla"
+---
+
+## Introduction
+
+We are finally getting to the last part of the probability part of our course, 4ST621. Here, a short discussion of and information on the basic stochastic convergences is provided. These convergences tell the story of how, under some circumstances, randomly generated values and distributions of some statistics converge to their limit, which are theoretical characteristics and probability distributions.
+
+In frequentist statistics, this knowledge is used to make generalising claims (inferences) about the underlying characteristics of the data-generating process.
+
+## Convergence in probability & almost sure convergence
+
+Standard *deterministic* convergence usually claims something about the limit of a sequence for an increasing value of the variable, e.g.
+
+$$
+\frac{1}{n} \xrightarrow{n\to\infty}0
+$$
+
+$$\lim_{n\to\infty}\left(\frac{1}{n}\right)=0$$
+
+In *stochastic* convergences, our limit is usually put upon some probability, not the variable's value. For convergence *in probability*, we start with a sequence of random variables $X_n$ and claim its convergence in probability to its limit $X$:
+
+$$
+X_n\xrightarrow{n\to\infty;P}X 
+$$
+
+$$
+p\lim(X_n)=X
+$$
+
+The definition of *in probability* convergence is done after specifying some small positive constant $\varepsilon>0$
+
+$$
+P(|X_n-X|<\varepsilon)\xrightarrow{n\to\infty}1
+$$
+
+or inversely
+
+$$
+P(|X_n-X|>\varepsilon)\xrightarrow{n\to\infty}0
+$$
+
+The first formulation stresses that **the** **probability** of absolute deviation of a sequence from its limit being up to the constant $\varepsilon$ increases; that is, the sequence converges *long-term*. The second formulation stresses that **the probability** of such deviation or larger is becoming smaller. That can be translated as saying that the probability of an *unusual* outcome decreases.
+
+### Bernoulli´s law
+
+The first use of the in probability convergence is Bernoulli´s first formulation of the weak law of large numbers: Let $X_1,X_2,...,X_n$ be a sequence of independent random variables with Bernoulli distribution, $X_i\sim Be(\pi)$.
+
+Let a sequence of relative frequencies be calculated from these random variables that is, $P_n=\frac{\sum_{i=1}^{n}(X_i)}{n}$. This sequence will converge in probability to the $\pi$.
+
+$$
+P_n \xrightarrow{n\to\infty;P}\pi
+$$
+
+This is akin to saying that the larger the sample size, the closer the relative frequency is to the underlying probability *in probability*.
+
+### Knichin´s law
+
+Let $X_1,X_2,...,X_n$ be a sequence of independent identically distributed random variables with any distribution with finite variance, $X_i\sim ?(E(X),Var(X))$.
+
+Let a sequence of means be calculated from these random variables, that is, $\overline{X_n}=\frac{\sum_{i=1}^{n}(X_i)}{n}$. This sequence will converge in probability to the expected value $E(X)$.
+
+$$ \overline{X_n} \xrightarrow{n\to\infty;P}E(X) $$
+
+This is akin to saying that the larger the sample size, the closer the mean is to the underlying expected value *in probability*.
+
+### Kolmogorov´s law
+
+So far, we have used *in* *probability* convergence. However, mathematical development in the early 20th century led to a different type of *stochastic* convergence, defined and proven for the two previous convergences, called *almost sure* (*a.s.*) convergence. This convergence is defined as
+
+$$
+P\left(\lim_{n\to\infty}X_n=X\right)=1
+$$
+
+In this type of convergence, the probability is not converging to 1; rather, the probability of convergence at some step *n* is 1. This claim is stronger than the previous one and leads to the so-called strong law of large numbers, also known as Kolmogorov´s law:
+
+$$ \overline{X_n} \xrightarrow{n\to\infty;a.s.}E(X) $$
+
+This fundamental theoretical development, along with the ease of use, basically cemented the frequentist statistic as the default inferential procedure for more than half a century.
+
+## Convergence in distribution
+
+Convergences in probability or almost surely state the limit value of a sequence of random variables. Convergence in distribution state the limit **distribution** of values of a sequence of random variables.
+
+Let $X_1,X_2,...,X_n$ be a sequence of independent identically distributed random variables with any distribution with finite variance, $X_i\sim ?(E(X),Var(X))$, and cumulative distribution function $F(x)$.
+
+From this sequence of random variables, let´s have a sequence of cumulative distribution functions $F_n(x)$. Convergence in distribution states that this sequence of $F_n(x)$ converges to a specific *underlying* cumulative distribution function $F(x)$.
+
+$$
+F_n(x)\xrightarrow{n\to\infty;D}F(x)
+$$
+
+One of the results is that the larger the dataset, the closer the *empirical* cumulative distribution function (cumulative relative frequencies) is to the *theoretical* cumulative distribution function of a generating process.
+
+### de Moivre-Laplace central limit theorem
+
+This theorem states the limit distribution of binomial distribution: Let $X_1,X_2,...,X_n$ be a sequence of independent random variables with Bernoulli distribution, $X_i\sim Be(\pi)$.
+
+Let a sequence of summations be calculated from these random variables, that is, $M_n=\sum_{i=1}^{n}(X_i)$. This summation follows binomial distribution but also converges *in distribution* to the normal distribution:
+
+$$
+M_n\sim Bi(n,\pi)\xrightarrow{n\to\infty;D}N \left(n\pi,\sqrt{n\pi(1-\pi)}\right) 
+$$
+
+We can make a similar claim about a sequence of means by linear transformation.
+
+$$\overline{X_n}=P=\frac{\sum_{i=1}^{n} X_i}{n}\xrightarrow{n\to\infty;D}N \left(\pi,\sqrt{\frac{\pi(1-\pi)}{n}} \right)$$One of the results is that for *n* large enough, we might approximate the binomial probabilities using the normal distribution. We denote this type of approximative distribution using a double-wave symbol $\approx$:
+
+$$
+\sum_{i=1}^nX_i \approx N\left(n\pi, \sqrt{n\pi(1-\pi)}  \right)
+$$
+
+$$
+P_n\approx N \left(\pi,\sqrt{\frac{\pi(1- \pi)}{n}}  \right)
+$$
+
+#### Continuity correction
+
+Approximating binomial distribution, which is integer-valued, with a continuous normal distribution, might pose an interesting problem. This problem arises with a question formulation: for binomial distribution, the question of what is the probability of being less or equal to *x* is the same as the question of what is the probability of being less than *x*+1; for normal distribution, however, these are two different questions because there is now a probability between *x* and *x*+1.
+
+$$
+Bi:P(X\leq x)=P(X<x+1)
+$$
+
+$$ N:F(x)\neq F(x+1) $$
+
+The solution to this problem is straightforward: when the question is about less or equal, we add 1/2; when the question is about less, we subtract 1/2. By this operation, we get the same result no matter how the question is posed:
+
+$$
+N+CC:F(x+0.5)=F(x+1-0.5)
+$$
+
+This is called continuity correction and is applicable any time we want to approximate an integer-valued random variable with a continuous one. If the random variable is discrete but not an integer-valued, we want to meet half the distance between the two values.
+
+This applies, for example, to the means of discrete variables (and relative frequency as well), where we can derive continuity correction this way:
+
+$$\frac{\sum_{i=1}^n X_i \pm1/2}{n}=\overline{X} \pm\frac{1}{2n}$$
+
+### Lindenberg-Lévy central limit theorem
+
+Similarly, as Knichin´s law is a generalisation of Bernoulli´s law, Lindenberg-Lévy's theorem generalises the de Moivre-Laplace theorem.
+
+Let $X_1,X_2,...,X_n$ be a sequence of independent identically distributed random variables with any distribution with finite variance, $X_i\sim ?(E(X),Var(X))$.
+
+Let a sequence of summations be calculated from these random variables, that is, $M_n=\sum_{i=1}^{n}(X_i)$. This sequence convergences in distribution to the normal distribution:
+
+$$
+M_n \xrightarrow{n\to\infty;D}N\left(nE(X),\sqrt{nVar(X)}\right)
+$$
+
+And by linear transformation, the sequence of arithmetic means also converges to the normal distribution:
+
+$$\overline{X_n}=\frac{\sum_{i=1}^n X_i}{n} \xrightarrow{n\to\infty;D}N\left(E(X),\sqrt{\frac{Var(X)}{n}}\right)$$One of the results is that for *n* large enough, we might use a normal distribution to calculate probabilities of sample means. Again, the approximation notation is commonly used:
+
+$$ M_n \approx N\left(nE(X),\sqrt{nVar(X)}\right) $$
+
+$$\overline{X_n}\approx N\left(E(X),\sqrt{\frac{Var(X)}{n}}\right)$$

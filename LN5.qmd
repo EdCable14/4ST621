@@ -1,0 +1,222 @@
+---
+title: "Selected Discrete Distributions"
+author: "Adam Cabla"
+---
+
+## Introduction
+
+Random Variables might be viewed as simple possible data-generating models. We have already introduced them as such and looked at the ways to describe their probability distributions and characteristics.
+
+Many of these models might be generalised under specific conditions. Given some assumptions about the data-generating process, a particular probability distribution might arise. Because some of these assumptions are legitimate and repeated often, we give the names to the arising probability distributions.
+
+Usually, one of the assumptions is some quantifiable property, which then enters the probability distribution as a so-called parameter; from the other side, the parameter is a numerical constant driving specific shape distribution.
+
+In this part, we will focus on some named discrete probability distributions; in the later part, we will look at some named continuous probability distributions.
+
+We will focus on expected value and variance to characterise these probability distributions.
+
+## Bernoulli distribution $X\sim Be(\pi)$
+
+Let´s begin with the simplest probability distribution. In this probability distribution, we assume one random trial ends by observing a specific random event of interest (often called *success)* or not. Such a random trial, which can end up with two different possible outcomes, is called Bernoulli´s trial after Swiss mathematician Jacob Bernoulli. As we will later see, the name connected to the first descriptions of probabilistic convergences and the discovery of Euler´s constant *e*.
+
+The probability of observing this random event of success is usually denoted as *p* or $\pi$. We will stick to the later notation in this course. Because this is the numerical constant that drives the specific shape of the distribution, it is a parameter of Bernoulli's random variable.
+
+The random variable is thus a random variable describing the probability distribution of a single Bernoulli trial. The probability of success is 𝜋, and the probability of failure is $1-\pi$. Putting *success* = 1 and *failure* = 0, we can write the probability function:
+
+$$
+P(x)=\pi^x(1-\pi)^{1-x}
+$$ for $x\in \{0;1\}$ and $\pi\in[0;1]$.
+
+Expected value and variance can be derived quite simply:
+
+$$
+E(X)=\sum_{x=0}^1x*P(x)=0*\pi^0*(1-\pi)^{0-0}+1*\pi^1*(1-\pi)^{1-0}=\pi
+$$ $$
+E(X^2)=\sum_{x=0}^1x^2*P(x)=0^2*\pi^0*(1-\pi)^{0-0}+1^2*\pi^1*(1-\pi)^{1-0}=\pi
+$$
+
+$$Var(X)=E(X^2)-[E(X)]^2=\pi-\pi^2=\pi(1-\pi)$$While for now, the Bernoulli distribution might seem a little dull and uninteresting, it has a prominent place in the probability theory and statistical modelling because it represents a model for the probability itself.
+
+## Binomial distribution $X \sim Bi(n,\pi)$
+
+The binomial distribution is an extension of the Bernoulli distribution. It starts with the Bernoulli trial (two possible outcomes; success (1) has probability $\pi$), but now we have *n* independentBernoulli trials. The random variable is the number of *successes* in those trials.
+
+The probability function of the Binomial distribution is
+
+$$
+P(x)={n\choose{x}}\pi^x(1-\pi)^{n-x}
+$$
+
+for $x=0,1,...,n$; $\pi\in[0;1]$ and $n\in \{0,1,2,...\}$
+
+The idea behind this probability function goes like this: first, think of the probability of one specific sequence of *failures* and *successes,* e.g. {0, 0, 0, 1, 1}. The probability of this sequence is $(1-\pi)*(1-\pi)*(1-\pi)*\pi*\pi=\pi^2(1-\pi)^3$.
+
+A more general question is the probability of observing two successes no matter the specific order. There are more possible sequences, each with the same probability. Overall probability is the sum of these probabilities. Hence, we multiply the probability of a sequence by the number of possible sequences, which is given by the binomial coefficient $n\choose{x}$.
+
+Expected value and variance are
+
+$$
+E(X)=n\pi
+$$
+
+$$
+Var(X)=n\pi(1-\pi)
+$$
+
+Binomial distribution might be more formally defined as the summation of *n* Bernoulli distributions:
+
+$$
+Y\sim Be(\pi)\to X=\sum_{i=1}^{n}Y_i \sim Bi(n,\pi)
+$$From the other side, Bernoulli distribution might be viewed as a specific case of the binomial distribution for *n* = 1.
+
+## Hypergeometric distribution $X \sim Hg(N,K,n)$
+
+The binomial distribution represents a number of *successes* in a series of independent Bernoulli trials with the constant probability $\pi$ of *success* in one trial. One process that leads to the Bernoulli trials is random sampling *with replacement*. In this specific sampling, a unit is sampled from the population and then returned so it can be sampled again later.
+
+In the setup of sampling from the population, a more common type is sampling *without replacement*. This means that once a unit is sampled from the population, it is NOT returned and hence cannot be sampled again. Think about sampling *at once*. In this type of sampling, the probability of *success* changes at each sampling step, violating the binomial distribution assumption.
+
+We can use hypergeometric distribution if we want to find out the probability distribution of the number of successes in the random sampling without replacement from the finite population. The information needed is the sample size *n*, population size *N*, and number of *successes* in the population *K*. Probability function is
+
+$$
+P(x)=\frac {\binom{K}{x} \binom{N-K}{n-x}}{\binom{N}{n}}
+$$
+
+for $x=\{max(0,n+K-N),...,min(n,K) \}$; $N\in\{0, 1, 2,...\}$, $K\in\{0, 1, 2, ..., N \}$, and $n\in \{0, 1, 2, ..., N \}$.
+
+The idea behind this probability function is to calculate the number of all possible samples with *x successes* and divide it by the number of all possible samples. Assuming that sampling is random, each possible sample has the same probability, and the classical definition of probability applies. Characteristics follow
+
+$$
+E(X)=\frac{K}{N}
+$$
+
+$$
+Var(X)=n\frac{K}{N}\left(1-\frac{K}{N}\right)\frac{N-n}{N-1}
+$$
+
+In the characteristics, we can see a resemblance to the binomial distribution. If we imagine sampling, starting at the first step, the probability of *success* is the same: $\pi=\frac{K}{N}$. The expected value is the same for both sampling schemes - with or without replacement. But variance is different by the last fraction $\frac{N-n}{N-1}$. This fraction is called finite population correction.
+
+One can also notice that the variance is the same for the sample size n = 1. That is because, with this sampling size, we talk about the Bernoulli distribution.
+
+## Poisson distribution $X \sim Po(\lambda)$
+
+With this distribution, we are still looking for a number of *successes* but call it now *events.* We will assume that those successes are occurring throughout specified intervals randomly and independently of each other with a constant rate of occurrence. This happens mostly in the time domain, but intervals can represent something else, e.g. distance. Under the mentioned assumption, the number of *events* follows the probability function.
+
+$$
+P(x)=e^{-\lambda}\frac{\lambda^x}{x!}
+$$
+
+for $x\in\{0, 1, 2, ...\}$ and $\lambda \in (0;\infty)$.
+
+Characteristics are
+
+$$
+E(X)=\lambda
+$$
+
+$$
+Var(X)=\lambda
+$$
+
+Parameter $\lambda$ is called a rate parameter; it defines the expected number of *events* in a given interval. $\lambda$ is always connected to the interval's length and responds to it one-to-one. E.g. if the rate is five *events* per hour, but we are interested in the number of events per day, we use $\lambda=24*5=120$.
+
+### Detour: convergence $Hg\to Bi\to Po$
+
+The three introduced distributions are tightly connected, and a possible order of approximations goes from the computationally most complex (relying on the largest number of parameters) to the least complex. However, there is no free lunch - approximations are not exact results, so we trade the result's precision with the complexity of calculations; less obviously, we trade parameters for the assumptions.
+
+Hypergeometric distribution can be approximated by binomial distribution if the ratio between sample and population sizes is small enough (the smaller, the better). With this ratio being small, there is only a small difference between sampling with and without replacement. Usually, the boundary for the approximation given is $n/N<0.1$
+
+$$
+Hg(N,K,n)\xrightarrow {n/N\to0} Bi\left(n,\pi=\frac{K}{N}\right)
+$$
+
+Similarly, binomial distribution can be approximated by the Poisson distribution if the number of Bernoulli trials is high enough and the probability of *success* is low enough. In this case, we stop thinking in a sequence of Bernoulli trials and start thinking about the whole sequence as one interval long enough. The boundaries for the approximation are usually in the literature given as $n>30,\pi<0.1$.
+
+$$
+Bi(n,\pi)\xrightarrow{n \to \infty,\pi \to 0}Po(\lambda=n\pi)
+$$
+
+With these approximations, expectations remain the same. Still, the shape of the probability distribution is changing, and variance is increasing, leading to overestimated probability in the tails and underestimated probability in the centre of the distribution.
+
+$$
+E(X)=n\frac{K}{N}=n\pi=\lambda
+$$
+
+$$
+Var(X)=n\frac{K}{N}\left(1-\frac{K}{N} \right)\frac{N-n}{N-1}<n\pi(1-\pi)<\lambda
+$$
+
+## Geometric distribution $X\sim Ge(\pi)$
+
+Let´s return to the Bernoulli trials. But now, our interest is in the number of *failures* before observing the first *success.* This random variable follows a geometric distribution with the probability function.
+
+$$
+P(x)=\pi*(1-\pi)^x
+$$
+
+for $x\in\{0,1,2,... \}$ and $\pi\in [0;1]$
+
+This probability function has a straightforward meaning: what is the probability of observing a sequence $\{ 0,0,...,1 \}$, where the number of 0s is the value of the random variable *x*.
+
+Characteristics are
+
+$$
+E(X)=\frac{\ 1 - \pi}{\pi}
+$$
+
+$$
+Var(X)=\frac{1-\pi}{\pi^2}
+$$
+
+This probability distribution can be connected to the binomial distribution. Using the same parameter $\pi$, we can see that the number of trials in the binomial distribution is,$n=x_{ge}$ and the $x_{bi}=0$ will give us the probability of observing 0 *successes* in a sequence. This has to be multiplied by one probability of *success* to have the end of the sequence equal 1. Imagine we want to see five failures before the first success in geometric distribution:
+
+$$
+X_{ge} \sim Ge(\pi) \to P(X_{ge}=5)=\pi*(1-\pi)^5
+$$
+
+Using binomial distribution:
+
+$$
+X_{bi} \sim Bi(n=x_{ge}=5;\pi) \to \pi*P(0)=\pi* \binom{5}{0}\pi^0(1-\pi)^{5-0}=\pi*(1-\pi)^5
+$$
+
+## Negative binomial distribution $X \sim NBi(r,\pi)$
+
+Similarly, as we generalised from the Bernoulli to the binomial distribution, we can generalise from the geometric distribution to the negative binomial distribution. Having a probability of *success* $\pi$*,* we are interested in the number of failures before the *r*-th *success*.
+
+The probability function has a very similar construction to the one from the binomial distribution - the probability of one sequence, e.g. $\{0, 0, 0,0,1,1 \}$ is $\pi^2*(1-\pi)^3$. The sequence has to end with *success* because that´s what we are waiting for. However, more than one sequence has two *successes* and ends with one (of those two), specifically $\binom{4}{1}$, because the last position is given, and we combine one *success* in 4 positions. All these sequences will have the same probability; the overall probability is the summation of these, which means $\binom{4}{1}\pi^2(1-\pi)^4$.
+
+Generalising this thought process, wanting to have *r successes*, we can write probability function as
+
+$$
+P(x)=\binom{x+r-1}{x}\pi^r(1-\pi)^x
+$$
+
+Characteristics are
+
+$$
+E(x)=r\frac{1-\pi}{\pi}
+$$
+
+$$
+Var(X)=r\frac{1-\pi}{\pi^2}
+$$
+
+A negative binomial distribution might be formally defined as a summation of the geometric distributions, the same way the summation of Bernoulli distributions led to a binomial.
+
+$$
+Y\sim Ge(\pi)\to X=\sum_{i=1}^{r}Y_i \sim NBi(r,\pi)
+$$
+
+A geometric distribution might be considered a special negative binomial case.
+
+The last relation in this part is the one between binomial and negative binomial distributions. From the example looking for the probability of observing the second *success* after the third *failure*, we can translate it to the binomial distribution: ignore the last position of a sequence, which is always given as *success*, then $\pi$ is shared, the number of trials is the number of *failures* and *successes* minus one, $n=x_{NBi}+r-1$ and we are looking for the probability of $x_{Bi}=r-1$. The last step is multiplying the result by the last position, hence the probability of *success* $\pi$.
+
+$$
+X_{Bi} \sim Bi(n=r+x_{NBi}-1=4,\pi)\to \pi*P(r-1=1)= \binom{4}{1}\pi^2(1-\pi)^3
+$$
+
+The only distinction from the formula for a negative binomial distribution is in binomial coefficient, but they are always equal
+
+$$
+\binom{4}{1}=\frac{4!}{1!3!}=\binom{4}{3}
+$$

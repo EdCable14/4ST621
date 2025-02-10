@@ -1,0 +1,5 @@
+---
+title: "About"
+---
+
+This is website dedicated to the 4ST621 course Probability and Mathematical Statistics 1.

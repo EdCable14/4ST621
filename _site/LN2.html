@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Adam Cabla">
+
+<title>4ST621 - Random Variable</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">4ST621</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Course_Intro.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Course Introduction</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LN1.html">Probability Theory</a></li><li class="breadcrumb-item"><a href="./LN2.html">Random Variable</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Course_Intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Probability Theory</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basics of Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Random Variable</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Characteristics of Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random Vectors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selected Discrete Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selected Continuous Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two Selected Multivariate Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stochastic convergences</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Mathematical Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point estimates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">LN11.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">LN12.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">LN13.qmd</span>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cumulative-distribution-function" id="toc-cumulative-distribution-function" class="nav-link active" data-scroll-target="#cumulative-distribution-function">Cumulative Distribution Function</a>
+  <ul class="collapse">
+  <li><a href="#how-to-calculate-probabilities" id="toc-how-to-calculate-probabilities" class="nav-link" data-scroll-target="#how-to-calculate-probabilities">How to calculate probabilities</a></li>
+  <li><a href="#distinguishing-discrete-and-continuous-random-variables" id="toc-distinguishing-discrete-and-continuous-random-variables" class="nav-link" data-scroll-target="#distinguishing-discrete-and-continuous-random-variables">Distinguishing discrete and continuous random variables</a></li>
+  </ul></li>
+  <li><a href="#discrete-random-variables" id="toc-discrete-random-variables" class="nav-link" data-scroll-target="#discrete-random-variables">Discrete Random Variables</a></li>
+  <li><a href="#continuous-random-variables" id="toc-continuous-random-variables" class="nav-link" data-scroll-target="#continuous-random-variables">Continuous Random Variables</a></li>
+  <li><a href="#quantile-function" id="toc-quantile-function" class="nav-link" data-scroll-target="#quantile-function">Quantile Function</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Random Variable</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Adam Cabla </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>So far, we have dealt with the topic of random events. But in statistics, it is much more usual to deal with the numbers - how can we get to the theoretical concepts upon which we can build statistical models?</p>
+<p>The answer is by developing the concept of random variables.</p>
+<p>A random variable X is a measurable function that maps from the sample space of random events to the measurable space, typically a set or interval of real numbers.</p>
+<p><span class="math display">\[
+P(X\in{S})=P(\omega\in{\Omega}|X(\omega)\in{S})
+\]</span></p>
+<p>Simply put, it defines how we get from random events to numbers.</p>
+<p>We usually use capital letters from the end of the alphabet (X, Y, Z or X<sub>1</sub>, X<sub>2</sub>, …) to denote the random variable (function) itself and small letters (x, y, z or x<sub>1</sub>, x<sub>2</sub>, …) to represent numerical values of this random variable.</p>
+<p>Random variables are usually divided into two classes: discrete random variable is such a variable in which the range of possible values is countable (finitely or infinitely), and we can assign a probability to individual values;</p>
+<p>On the other hand, a continuous random variable is such a variable in which the range is uncountably infinite, most commonly interval, and we cannot assign a probability to individual values.</p>
+<p>The term <em>absolutely</em> has its mathematical meaning and is usually omitted in textbooks, so from now on, it will be called a continuous random variable.</p>
+<section id="cumulative-distribution-function" class="level2">
+<h2 class="anchored" data-anchor-id="cumulative-distribution-function">Cumulative Distribution Function</h2>
+<p>The cumulative distribution function is the most universal way to describe a probability distribution of any random variable. It is defined as</p>
+<p><span class="math display">\[ F(x)=P(X\leq{x}) \]</span></p>
+<p>The cumulative distribution function at point <em>x</em> is a probability that a random variable <em>X</em> is lower or equal to the value <em>x</em>.</p>
+<p>This function has several important properties:</p>
+<ul>
+<li><p>Is non-decreasing <span class="math inline">\(x_1\leq{x_2}\to{F(x_1)}\leq{F(x_2)}\)</span></p></li>
+<li><p>As any probability, takes values in the range <span class="math inline">\([0,1]\)</span></p></li>
+<li><p>From the two properties, we can see the limits: <span class="math inline">\(lim_{x\to-\infty}F(x)=0\)</span> and <span class="math inline">\(lim_{x\to\infty}F(x)=1\)</span></p></li>
+<li><p>Is right-continuous</p></li>
+</ul>
+<p>The last point is important for formally distinguishing discrete and continuous random variables.</p>
+<section id="how-to-calculate-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-calculate-probabilities">How to calculate probabilities</h3>
+<p>Once we have a random variable described by its cumulative distribution function, we can calculate any probability related to the random variable. In the most general way, we can write.</p>
+<p><span class="math display">\[ P(x_1&lt;X\leq{x_2})=P(X\leq{x_2})-P(X\leq{x_1})=F(x_2)-F(x_1) \]</span></p>
+<p>Using the knowledge of limits of the cumulative distribution function, we can see special cases:</p>
+<p><span class="math display">\[ P(X\leq{x_2})=P(-\infty&lt;X\leq{x_2})=F(x_2)-F(-\infty)=F(x_2)-0=F(x_2) \]</span></p>
+<p><span class="math display">\[ P(X&gt;x_1)=P(x_1&lt;X\leq{\infty})=F(\infty)-F(x_1)=1-F(x_1) \]</span></p>
+<p>These cases can also be derived from the cumulative distribution function’s definition and the complement operation.</p>
+<p>The last special case is the calculation of the point probability.</p>
+<p><span class="math display">\[ P(X=x)=P(x&lt;X\leq{x})= P(X\leq{x})-P(X&lt;x)=F(x)-F(x^-) \]</span></p>
+<p>We can read it this way: the probability of a point <em>x</em> is the value of cumulative distribution at this point minus the value of cumulative distribution function at this point evaluated from the left.</p>
+</section>
+<section id="distinguishing-discrete-and-continuous-random-variables" class="level3">
+<h3 class="anchored" data-anchor-id="distinguishing-discrete-and-continuous-random-variables">Distinguishing discrete and continuous random variables</h3>
+<p>The cumulative distribution function can have points of discontinuity - at these points, values of F(<em>x</em>) and F(<em>x</em><sup><sub>-</sub></sup>) are different, and there is a point probability. If the cumulative distribution function is otherwise constant, it is a so-called step function, as it looks like steps. This is the characteristic outlook of the cumulative distribution function of discrete random variables.</p>
+<p>If the cumulative distribution function contains no points of discontinuity, it is smooth; then the random variable is continuous.</p>
+<p>Theoretically, a mix can occur - the cumulative distribution function can have points of discontinuity and be smoothly increasing over some range - but we will not cover this specific case.</p>
+</section>
+</section>
+<section id="discrete-random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="discrete-random-variables">Discrete Random Variables</h2>
+<p>As already noted, discrete random variables are such random variables that have a countable range of possible values, and we can thus assign specific point probabilities. Its cumulative distribution function is a step function, and the probability of value x can be calculated as the <em>height</em> <em>of the step</em> of the cumulative distribution function at this point <em>x.</em> <span class="math display">\[ P(X=x)=P(x)=(x)-F(x^-) \]</span></p>
+<p>The function assigning probabilities P(<em>x</em>) for all points <em>x</em> is called the probability function (or, in older publications, probability mass function) and is the most common way to describe the probability distribution of discrete random variables.</p>
+<p>Some basic properties are:</p>
+<ul>
+<li><p>It is a probability <span class="math inline">\(0\leq{P(x)}\leq1\)</span></p></li>
+<li><p>One of the values has to occur:<span class="math inline">\(\sum_{x=-\infty}^{\infty}P(x)=1\)</span></p></li>
+<li><p>The value of the cumulative distribution function can be calculated by <em>cumulating</em> probabilities (<em>heights</em> of the <em>steps)</em> up to the point x: <span class="math inline">\(F(x)=P(X\leq{x})=\sum_{i=-\infty}^{x}P(t)\)</span></p></li>
+</ul>
+</section>
+<section id="continuous-random-variables" class="level2">
+<h2 class="anchored" data-anchor-id="continuous-random-variables">Continuous Random Variables</h2>
+<p>Continuous random variables are such random variables that have an uncountably infinite range, usually an interval range, and we thus can not assign specific point probabilities. Probabilities are assigned only to the intervals. Its cumulative distribution function is smooth.</p>
+<p>So, in this type of random variable, we can not have point probabilities in a classical sense. Still, we can describe point <em>intensity</em> as a <em>speed</em> <em>of increase</em> of cumulative distribution function at point <em>x</em>, thus:</p>
+<p><span class="math display">\[f(x)=\frac{\partial{F(x)}}{\partial{x}}\]</span></p>
+<p>Function f(<em>x</em>) is called a probability density function. This function is the most common way to display a probability distribution of random variables. Even though it does not represent point probabilities, it still can be used to compare the likeliness of values close to the points of interest.</p>
+<p>The most important relation between the probability density function and the probability is that the probability of a specific range of values of a random variable is an area under the probability density function in the specified range:</p>
+<p><span class="math display">\[ P(x_1&lt;X&lt;x_2)=P(x_1&lt;X\leq{x_2})=P(x_1\leq{X}&lt;x_2)=P(x_1\leq{X}\leq{x_2})=F(x_2)-F(x_1)=\int_{x_1}^{x_2}f(x)dx \]</span></p>
+<p>Some important properties of probability density functions (compare them to properties of probability (mass) functions:</p>
+<ul>
+<li><p>It is non-negative because the cumulative distribution function is non-decreasing: <span class="math inline">\(f(x)\geq0\)</span></p></li>
+<li><p>Total area is 1: <span class="math inline">\(\int_{x=-\infty}^{\infty}f(x)=1\)</span></p></li>
+<li><p><span class="math inline">\(F(x)=P(X\leq{x})=\int_{t=-\infty}^{x}f(t)\)</span></p></li>
+</ul>
+</section>
+<section id="quantile-function" class="level2">
+<h2 class="anchored" data-anchor-id="quantile-function">Quantile Function</h2>
+<p>In describing a probability distribution of random variables, we have utilised the cumulative distribution function, which is universal, the probability function for discrete random variables, and the probability density function for continuous random variables.</p>
+<p>There are other ways to describe probability distribution, e.g.&nbsp;via survival function or hazard function. We will skip these, but one other function is important in this course: a quantile function.</p>
+<p>100P% quantile, denoted as <em>x<sub>p</sub></em>, is such a value that a random variable can take this value or lower with a given probability <em>P</em>. Hence</p>
+<p><span class="math display">\[ P(X\leq{x_p})=P\to F(x_p)=P \]</span></p>
+<p>The quantile function is closely related to the cumulative distribution function; it is the inverse of it</p>
+<p><span class="math display">\[ x_p=Q(P)=F^{-1}(P) \]</span></p>
+<p>To rephrase it: when we know the value and want to find the yet unknown probability that the random variable is less or equal to this already known value, we use the cumulative distribution function: <span class="math inline">\(x\to{P}\)</span>.</p>
+<p>And when we know the probability that the random variable is less or equal to some yet unknown value, we are solving inverse problem <span class="math inline">\(P\to{x}\)</span>.</p>
+<p>The cumulative distribution function must be monotonic because we need to find its inverse function. However, the cumulative distribution function is generally only non-decreasing, which means it is not necessarily monotonic.</p>
+<p>The first obvious problem arises for discrete random variables, in which the cumulative distribution function is generally a step function. We will avoid this problem by simply avoiding using quantile functions for discrete random variables, even though generalisation is available.</p>
+<p>For continuous random variables, we will assume it is strictly monotonic for 0 &lt; <em>P</em> &lt; 1. We will thus not look for 100% and 0% quantiles.</p>
+<p>Many quantiles have their specific names, usually derived from the number of probabilistically equal portions into which they divide the distribution. The most well-known is median <em>x</em><sub>0.5,</sub> which divides the distribution into two halves with the same probability. Others include:</p>
+<ul>
+<li><p>Terciles x<sub>0.33</sub> and x<sub>0.67</sub></p></li>
+<li><p>Quartiles x<sub>0.25</sub>, x<sub>0.5</sub>, and x<sub>0.75</sub></p></li>
+<li><p>Quintiles x<sub>0.2</sub>, x<sub>0.4</sub>, x<sub>0.6</sub>, and x<sub>0.8</sub></p></li>
+<li><p>….</p></li>
+<li><p>Percentiles x<sub>0.01</sub>,x<sub>0.02</sub>,…,x<sub>0.99</sub></p></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

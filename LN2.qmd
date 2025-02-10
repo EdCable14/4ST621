@@ -1,0 +1,144 @@
+---
+title: "Random Variable"
+author: "Adam Cabla"
+---
+
+So far, we have dealt with the topic of random events. But in statistics, it is much more usual to deal with the numbers - how can we get to the theoretical concepts upon which we can build statistical models?
+
+The answer is by developing the concept of random variables.
+
+A random variable X is a measurable function that maps from the sample space of random events to the measurable space, typically a set or interval of real numbers.
+
+$$
+P(X\in{S})=P(\omega\in{\Omega}|X(\omega)\in{S})
+$$
+
+Simply put, it defines how we get from random events to numbers.
+
+We usually use capital letters from the end of the alphabet (X, Y, Z or X~1~, X~2~, ...) to denote the random variable (function) itself and small letters (x, y, z or x~1~, x~2~, ...) to represent numerical values of this random variable.
+
+Random variables are usually divided into two classes: discrete random variable is such a variable in which the range of possible values is countable (finitely or infinitely), and we can assign a probability to individual values;
+
+On the other hand, a continuous random variable is such a variable in which the range is uncountably infinite, most commonly interval, and we cannot assign a probability to individual values.
+
+The term *absolutely* has its mathematical meaning and is usually omitted in textbooks, so from now on, it will be called a continuous random variable.
+
+## Cumulative Distribution Function
+
+The cumulative distribution function is the most universal way to describe a probability distribution of any random variable. It is defined as
+
+$$ F(x)=P(X\leq{x}) $$
+
+The cumulative distribution function at point *x* is a probability that a random variable *X* is lower or equal to the value *x*.
+
+This function has several important properties:
+
+-   Is non-decreasing $x_1\leq{x_2}\to{F(x_1)}\leq{F(x_2)}$
+
+-   As any probability, takes values in the range $[0,1]$
+
+-   From the two properties, we can see the limits: $lim_{x\to-\infty}F(x)=0$ and $lim_{x\to\infty}F(x)=1$
+
+-   Is right-continuous
+
+The last point is important for formally distinguishing discrete and continuous random variables.
+
+### How to calculate probabilities
+
+Once we have a random variable described by its cumulative distribution function, we can calculate any probability related to the random variable. In the most general way, we can write.
+
+$$ P(x_1<X\leq{x_2})=P(X\leq{x_2})-P(X\leq{x_1})=F(x_2)-F(x_1) $$
+
+Using the knowledge of limits of the cumulative distribution function, we can see special cases:
+
+$$ P(X\leq{x_2})=P(-\infty<X\leq{x_2})=F(x_2)-F(-\infty)=F(x_2)-0=F(x_2) $$
+
+$$ P(X>x_1)=P(x_1<X\leq{\infty})=F(\infty)-F(x_1)=1-F(x_1) $$
+
+These cases can also be derived from the cumulative distribution function's definition and the complement operation.
+
+The last special case is the calculation of the point probability.
+
+$$ P(X=x)=P(x<X\leq{x})= P(X\leq{x})-P(X<x)=F(x)-F(x^-) $$
+
+We can read it this way: the probability of a point *x* is the value of cumulative distribution at this point minus the value of cumulative distribution function at this point evaluated from the left.
+
+### Distinguishing discrete and continuous random variables
+
+The cumulative distribution function can have points of discontinuity - at these points, values of F(*x*) and F(*x*^~-~^) are different, and there is a point probability. If the cumulative distribution function is otherwise constant, it is a so-called step function, as it looks like steps. This is the characteristic outlook of the cumulative distribution function of discrete random variables.
+
+If the cumulative distribution function contains no points of discontinuity, it is smooth; then the random variable is continuous.
+
+Theoretically, a mix can occur - the cumulative distribution function can have points of discontinuity and be smoothly increasing over some range - but we will not cover this specific case.
+
+## Discrete Random Variables
+
+As already noted, discrete random variables are such random variables that have a countable range of possible values, and we can thus assign specific point probabilities. Its cumulative distribution function is a step function, and the probability of value x can be calculated as the *height* *of the step* of the cumulative distribution function at this point *x.* $$ P(X=x)=P(x)=(x)-F(x^-) $$
+
+The function assigning probabilities P(*x*) for all points *x* is called the probability function (or, in older publications, probability mass function) and is the most common way to describe the probability distribution of discrete random variables.
+
+Some basic properties are:
+
+-   It is a probability $0\leq{P(x)}\leq1$
+
+-   One of the values has to occur:$\sum_{x=-\infty}^{\infty}P(x)=1$
+
+-   The value of the cumulative distribution function can be calculated by *cumulating* probabilities (*heights* of the *steps)* up to the point x: $F(x)=P(X\leq{x})=\sum_{i=-\infty}^{x}P(t)$
+
+## Continuous Random Variables
+
+Continuous random variables are such random variables that have an uncountably infinite range, usually an interval range, and we thus can not assign specific point probabilities. Probabilities are assigned only to the intervals. Its cumulative distribution function is smooth.
+
+So, in this type of random variable, we can not have point probabilities in a classical sense. Still, we can describe point *intensity* as a *speed* *of increase* of cumulative distribution function at point *x*, thus:
+
+$$f(x)=\frac{\partial{F(x)}}{\partial{x}}$$
+
+Function f(*x*) is called a probability density function. This function is the most common way to display a probability distribution of random variables. Even though it does not represent point probabilities, it still can be used to compare the likeliness of values close to the points of interest.
+
+The most important relation between the probability density function and the probability is that the probability of a specific range of values of a random variable is an area under the probability density function in the specified range:
+
+$$ P(x_1<X<x_2)=P(x_1<X\leq{x_2})=P(x_1\leq{X}<x_2)=P(x_1\leq{X}\leq{x_2})=F(x_2)-F(x_1)=\int_{x_1}^{x_2}f(x)dx $$
+
+Some important properties of probability density functions (compare them to properties of probability (mass) functions:
+
+-   It is non-negative because the cumulative distribution function is non-decreasing: $f(x)\geq0$
+
+-   Total area is 1: $\int_{x=-\infty}^{\infty}f(x)=1$
+
+-   $F(x)=P(X\leq{x})=\int_{t=-\infty}^{x}f(t)$
+
+## Quantile Function
+
+In describing a probability distribution of random variables, we have utilised the cumulative distribution function, which is universal, the probability function for discrete random variables, and the probability density function for continuous random variables.
+
+There are other ways to describe probability distribution, e.g. via survival function or hazard function. We will skip these, but one other function is important in this course: a quantile function.
+
+100P% quantile, denoted as *x~p~*, is such a value that a random variable can take this value or lower with a given probability *P*. Hence
+
+$$ P(X\leq{x_p})=P\to F(x_p)=P $$
+
+The quantile function is closely related to the cumulative distribution function; it is the inverse of it
+
+$$ x_p=Q(P)=F^{-1}(P) $$
+
+To rephrase it: when we know the value and want to find the yet unknown probability that the random variable is less or equal to this already known value, we use the cumulative distribution function: $x\to{P}$.
+
+And when we know the probability that the random variable is less or equal to some yet unknown value, we are solving inverse problem $P\to{x}$.
+
+The cumulative distribution function must be monotonic because we need to find its inverse function. However, the cumulative distribution function is generally only non-decreasing, which means it is not necessarily monotonic.
+
+The first obvious problem arises for discrete random variables, in which the cumulative distribution function is generally a step function. We will avoid this problem by simply avoiding using quantile functions for discrete random variables, even though generalisation is available.
+
+For continuous random variables, we will assume it is strictly monotonic for 0 \< *P* \< 1. We will thus not look for 100% and 0% quantiles.
+
+Many quantiles have their specific names, usually derived from the number of probabilistically equal portions into which they divide the distribution. The most well-known is median *x*~0.5,~ which divides the distribution into two halves with the same probability. Others include:
+
+-   Terciles x~0.33~ and x~0.67~
+
+-   Quartiles x~0.25~, x~0.5~, and x~0.75~
+
+-   Quintiles x~0.2~, x~0.4~, x~0.6~, and x~0.8~
+
+-   ....
+
+-   Percentiles x~0.01~,x~0.02~,...,x~0.99~

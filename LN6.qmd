@@ -1,0 +1,164 @@
+---
+title: "Selected Continuous Distributions"
+author: "Adam Cabla"
+---
+
+## Introduction
+
+In this part, we will continue with specific named probability distributions but focus on some continuous probability distributions.
+
+## Continuous uniform distribution $X\sim U(a,b)$
+
+This is likely the simplest continuous probability distribution. Uniform means equal probabilities for a discrete case or constant probability density function for a continuous case.
+
+This distribution has limited real-world use, e.g. as a model of the waiting time for the regularly repeating event. Maybe the more important role of this distribution is its use in generating random numbers. Having generated a random value from the $X\sim U(0,1)$ distribution, it can be an input to the quantile function of any desired random variable, generating a random value from that random variable.
+
+From the constant probability density function, we can derive that it is
+
+$$
+f(x)=\frac{1}{b-a}
+$$
+
+for $x\in [a,b]$ and $-\infty<a<b<\infty$.
+
+For probability calculations, the cumulative distribution function is usually easier to use
+
+$$
+F(x)=\frac{x-a}{b-a}
+$$
+
+and the quantile function, the inverse of the cumulative distribution function
+
+$$
+Q(P)=a+(b-a)P
+$$
+
+There is not much more to be said about this distribution; maybe the most common special case 𝑋∼𝑈(0,1) is called standard uniform distribution.
+
+## Exponential distribution $X\sim E(\lambda)$
+
+Let´s assume that random events are not regularly repeating but occurring randomly throughout time and independently of each other. The rate of occurrence of these events is the parameter $\lambda$, the one we have already seen in the Poisson distribution with the same assumptions.
+
+The focus of the Poisson distribution is the number of *events* in a specified interval; the focus of the exponential distribution is time to the first occurrence of the *event*. With the mentioned assumptions, this time follows the exponential distribution described by the following functions.
+
+$$
+f(x)=\lambda \exp(-\lambda x)
+$$
+
+$$
+F(x)=1-\exp(-\lambda x)
+$$
+
+$$
+Q(P)=-\frac{-\ln (1-P)}{\lambda} 
+$$
+
+for $x\in(0;\infty)$ and $\lambda \in [0,\infty)$.
+
+The two main moment characteristics of this distribution are
+
+$$
+E(X)=\frac{1}{\lambda}
+$$
+
+$$
+Var(X)=\frac{1}{\lambda^2}
+$$
+
+The exponential and the Poisson distributions are intertwined and serve as the basis for analysing the so-called Poisson process. An exponential distribution is useful in other contexts; for example, it can serve as a model of the right tail of an unknown underlying distribution, which is useful in risk modelling.
+
+In some distributions, especially continuous ones, parameters are not set in stone, and different parametrisations of the distribution can be used to shift focus on various properties. Of course, all the functions describing the probability distribution and its characteristics must be adjusted to the parametrisation of choice.
+
+For exponential distribution, one might stumble upon using the scale parameter, which is the inverse of the rate parameter $\sigma=\frac{1}{\lambda}$. This parametrisation might be useful in contexts where the focus is not the random events' occurrence rate but the expected value because $E(X)=\delta$.
+
+## Normal (Gaussian) distribution $X\sim N(\mu,\sigma)$
+
+The normal distribution is pervasive in statistics because of its presence as a limited distribution of various statistics, most importantly summation. Normality assumption also simplifies a lot of calculations due to its properties. This makes it very useful in many contexts regarding estimates, which is the topic of the second large part of this lecture notes.
+
+The probability density of the normal distribution is
+
+$$
+f(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{- \frac{(x-\mu)^2}{2\sigma^2}}
+$$
+
+For $x \in (-\infty;\infty)$ and $\mu \in (-\infty, \infty)$, $\sigma \in(0,\infty)$.
+
+Integrating this density to get the cumulative distribution function is not analytically solvable, so we do not have a simple closed formula for evaluating its value.
+
+$$
+F(x)=\int_{-\infty}^x \frac{1}{\sigma \sqrt{2\pi}}e^{- \frac{(t-\mu)^2}{2\sigma^2}}dt
+$$
+
+We do not have the closed formula for the quantile function based on the same argument. Characteristics of this random variable are straightforward from the parameters.
+
+$$
+E(X)=\mu
+$$
+
+$$
+Var(X)=\sigma^2
+$$
+
+Nowadays, obtaining probabilities and quantiles of normal distribution is an easy task due to the computational power of computers. Historically, it was a little more complicated, though. Numerical evaluation of the integrals was a tiresome task. Still, luckily for the normal distribution, our ancestors could use one property - any linear transformation of the normal distribution is also normally distributed.
+
+That means that any normal distribution could be transformed by standardisation (recall standard moments), and the result would be a standard normal distribution with zero expected value and unit variance. This distribution is so prominent that it has its specific notation: $Z\sim N(0,1)$.
+
+So, the need to calculate the integrals was reduced to only one distribution, and results were tabulated for general use. Hence, for $X\sim N(\mu, \sigma)$, we can write
+
+$$
+Z=\frac{X-\mu}{\sigma} \sim N(0,1)
+$$
+
+$$
+F(x)= \Phi \left(\frac {x-\mu}{\sigma}\right)=\Phi(z)
+$$
+
+$$
+x_p=\mu+\sigma z_p
+$$
+
+Where $\Phi$ is a notation for the cumulative distribution function of standard normal distribution $Z \sim N(0,1)$, and $z_p$ is the 100*P*% quantile of the standard normal distribution, both to be found in the appropriate tables.
+
+Another property of normal distribution worth mentioning is its symmetry around the expected value. For standard normal distribution, it means symmetry around 0, which leads to two relations used to simplify the tables mentioned above:
+
+$$
+\Phi(z)=1-\Phi(-z)
+$$
+
+$$
+z_p=-z_{1-p}
+$$
+
+The standard normal distribution has become so pervasive that it is still used in statistics, e.g., in the form of *z*-*scores* or *critical values* for constructing *rejection regions*.
+
+*Z*-*scores* show how many standard deviations the value is from the variable's mean (or the random variable´s expected value to stay in probability theory).
+
+## Log-normal (Galton) distribution $X \sim LN(\mu,\sigma)$
+
+If the normal distribution rises as the distribution of a summation, there has to exist the distribution of a product. This is a log-normal distribution. The name suggests its relation to the normal distribution.
+
+$$
+X\sim LN(\mu,\sigma) \to Y=\log (X) \sim N(\mu, \sigma)
+$$
+
+$$
+Y\sim N(\mu,\sigma) \to X=\exp (Y) \sim LN(\mu, \sigma)
+$$
+
+Again, the cumulative distribution and quantile function do not have an analytical solution; hence, the relation was used.
+
+$$
+Z=\frac{\log(x)-\mu}{\sigma} \sim N(0,1)
+$$ $$x_p=e^{\mu+\sigma z_p}$$
+
+You can notice that parameters are the expected value and standard deviation of the log-transformed version of this distribution, not directly equal to them. Characteristics have to be obtained using formulas.
+
+$$
+E(X)=e^{\mu+\frac {\sigma^2}{2}}
+$$
+
+$$
+Var(X)=e^{2\mu+\sigma^2}*\left(e^{\sigma^2} -1\right)
+$$
+
+This distribution is well-known and often used in statistical modelling for its shape - it is right-skewed and heavy-tailed, meaning it is suitable for the distribution with possible occurrences of extreme values.
