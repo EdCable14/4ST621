@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.353">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Adam Cabla">
+
+<title>4ST621 - Random Vectors</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">4ST621</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html" rel="" target="">
+ <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./Course_Intro.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Course Introduction</span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools ms-auto">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LN1.html">Probability Theory</a></li><li class="breadcrumb-item"><a href="./LN4.html">Random Vectors</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Course_Intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Introduction</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Probability Theory</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Basics of Probability</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Random Variable</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Characteristics of Random Variables</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN4.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Random Vectors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selected Discrete Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Selected Continuous Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Two Selected Multivariate Distributions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stochastic convergences</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Mathematical Statistics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Sampling</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./LN10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Point estimates</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+ <span class="menu-text">LN11.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">LN12.qmd</span>
+  </li>
+          <li class="sidebar-item">
+ <span class="menu-text">LN13.qmd</span>
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#joint-distribution" id="toc-joint-distribution" class="nav-link" data-scroll-target="#joint-distribution">Joint distribution</a></li>
+  <li><a href="#marginal-distribution" id="toc-marginal-distribution" class="nav-link" data-scroll-target="#marginal-distribution">Marginal distribution</a></li>
+  <li><a href="#joint-characteristics" id="toc-joint-characteristics" class="nav-link" data-scroll-target="#joint-characteristics">Joint characteristics</a>
+  <ul class="collapse">
+  <li><a href="#covariance" id="toc-covariance" class="nav-link" data-scroll-target="#covariance">Covariance</a></li>
+  <li><a href="#correlation" id="toc-correlation" class="nav-link" data-scroll-target="#correlation">Correlation</a></li>
+  </ul></li>
+  <li><a href="#conditional-distribution" id="toc-conditional-distribution" class="nav-link" data-scroll-target="#conditional-distribution">Conditional distribution</a>
+  <ul class="collapse">
+  <li><a href="#regression-function" id="toc-regression-function" class="nav-link" data-scroll-target="#regression-function">Regression function</a></li>
+  <li><a href="#skedastic-function" id="toc-skedastic-function" class="nav-link" data-scroll-target="#skedastic-function">Skedastic function</a></li>
+  </ul></li>
+  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence">Independence</a></li>
+  <li><a href="#mutual-information" id="toc-mutual-information" class="nav-link" data-scroll-target="#mutual-information">Mutual Information</a>
+  <ul class="collapse">
+  <li><a href="#uncertainty-coefficients" id="toc-uncertainty-coefficients" class="nav-link" data-scroll-target="#uncertainty-coefficients">Uncertainty coefficients</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Random Vectors</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Adam Cabla </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>So far, we have moved in one dimension, from one random trial through the possible random events stemming from that trial to the random variable mapping probability distribution on the real-valued axis from those random events.</p>
+<p>Now, we are going to extend this into multiple dimensions. A random vector is a measurable function that maps from the sample space of random events to the measurable space, now <em>p</em>-dimensional sets or intervals of real numbers.</p>
+<p>Simply put, if one random event leads to <em>p</em> numbers, we are dealing with the random vector <strong>X</strong> and the realisation of this random vector <strong>x</strong>.</p>
+<p>While random vectors can have <span class="math inline">\(p\in\mathbb{N}\)</span> dimensions and can be either discrete, continuous or even a mix of the two, we will make things easier in this course by working only with 2-dimensional random vectors.</p>
+<p><span class="math display">\[
+\textbf{X}={X_1 \choose{X_2}}; \textbf{x}={x_1 \choose{x_2}}
+\]</span></p>
+<p>Random vectors have distributions that can be described jointly, marginally or conditionally.</p>
+</section>
+<section id="joint-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="joint-distribution">Joint distribution</h2>
+<p>The joint distribution of a random vector is described as an intersection. Translated, the joint cumulative distribution function for a two-dimensional random vector is</p>
+<p><span class="math display">\[
+F(x_1,x_2)=P(X_1\leq{x_1}\cap X_2\leq{x_2})
+\]</span></p>
+<p>joint probability funcion is</p>
+<p><span class="math display">\[ P(x_1,x_2)=P(X_1={x_1}\cap X_2={x_2}) \]</span></p>
+<p>and joint probability density function is</p>
+<p><span class="math display">\[ f(x_1,x_2)=f(X_1={x_1}\cap X_2={x_2}) \]</span></p>
+<p>We are omitting a case of a mixed random vector (continuous and discrete random variables in one random vector).</p>
+<p>Relations between the mentioned descriptions of joint probability distributions are generalisations of the already seen relations in the random variables</p>
+<p><span class="math display">\[ F(x_1,x_2)=\sum_{t=-\infty}^{x_1}\sum_{u=-\infty}^{x_2}P(x_1,x_2)\]</span></p>
+<p><span class="math display">\[
+F(x_1,x_2)=\int_{t=-\infty}^{x_1}\int_{u=-\infty}^{x_2}f(x_1,x_2)dx_2dx_1
+\]</span></p>
+<p><span class="math display">\[
+f(x_1,x_2)=\frac{\partial\partial F(x_1,x_2)}{\partial x_1 \partial x_2}
+\]</span></p>
+</section>
+<section id="marginal-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-distribution">Marginal distribution</h2>
+<p>Marginal distribution refers to any subset of the originating random vector independent of the omitted part of that random vector. Say we have a 5-dimensional random vector:</p>
+<p><span class="math display">\[
+\textbf{X}=
+\begin{pmatrix}
+X_1\\
+X_2\\
+X_3\\
+X_4\\
+X_5\\
+\end{pmatrix}
+\]</span></p>
+<p>Then, all the following random vectors and random variables can be called marginal vectors or variables (this is not a complete enumeration, just examples):</p>
+<p><span class="math display">\[ \textbf{X}= \begin{pmatrix} X_1\\ X_2\\ X_3\\ X_4\\\end{pmatrix},
+\textbf{X}= \begin{pmatrix} X_1\\ X_4 \end{pmatrix},
+X_1 \]</span></p>
+<p>Marginal distributions can be obtained from the joint distribution. Using the probability function, one needs to sum joint probabilities across the variables he is <em>getting rid of</em>.</p>
+<p>The idea explained in two dimensions is this: You want, e.g.&nbsp;the probability P(<em>X</em> = 1); this probability is a union of all the joint probabilities containing <em>X</em> = 1, e.g.&nbsp;P(<em>X</em><sub>1</sub> = 1, <em>X</em><sub>2</sub> = 0), P(<em>X</em><sub>1</sub> = 1, <em>X</em><sub>2</sub> = 1), P(<em>X</em><sub>1</sub> = 1, <em>X</em><sub>2</sub> = 2). Because these intersections are disjoint random events, the union is calculated as a simple summation.</p>
+<p><span class="math display">\[
+P(x_1)=\sum_{x_2=-\infty}^\infty P(x_1, x_2)
+\]</span></p>
+<p>The same logic applies to continuous random variables described by a probability density function but using continuous mathematics. i.e.&nbsp;integration</p>
+<p><br>
+<span class="math display">\[
+f(x_1)=\int_{x_2=-\infty}^\infty f(x_1, x_2)dx_2
+\]</span></p>
+<p>Last but not least comes the relation between marginal and joint cumulative distribution function, which is straightforward</p>
+<p><span class="math display">\[
+F(x_1)= P(X_1 \leq x_1)=P(X_1 \leq x_1 \cap X_2 &lt; \infty)= F(x_1,x_2=\infty)
+\]</span></p>
+<p>Having marginal distributions of the random variables, all their characteristics can be calculated as usual. We will use marginal expected values and marginal variances for the characteristics of a random vector.</p>
+</section>
+<section id="joint-characteristics" class="level2">
+<h2 class="anchored" data-anchor-id="joint-characteristics">Joint characteristics</h2>
+<p>Joint characteristics, or just characteristics of a random vector, characterise specific properties of a random vector as a whole. Again, for the needs of this course, we simplify and use only the most common characteristics.</p>
+<p>The location of a random vector is commonly characterised by a vector of expected values, which is a vector composed of marginal expected values of marginal random variables. In two dimensions:</p>
+<p><span class="math display">\[
+E(\textbf{X})= \begin{pmatrix} E(X_1)\\ E(X_2) \end{pmatrix}
+\]</span></p>
+<p>A variance-covariance matrix commonly characterises the variability of a random vector. In this matrix, marginal variances are used together with covariances.</p>
+<section id="covariance" class="level3">
+<h3 class="anchored" data-anchor-id="covariance">Covariance</h3>
+<p>Covariance is a measure of the linear relation between the two random variables. It can take any real value; if it is negative, the two random variables are negatively linearly associated; if it is positive, the two random variables are positively linearly associated; if it is zero, the two random variables are not linearly associated. The word linearly is important here - random variables can have non-linear associations, which can be visible using, e.g.&nbsp;regression or skedastic functions. Linearly can be viewed as <em>on average</em>. This will be discussed later in this chapter.</p>
+<p>Mathematically, covariance is calculated from the definition</p>
+<p><span class="math display">\[
+cov(X_1,X_2)=E[(X_1-E(X_1))*(X_2-E(X_2))]
+\]</span></p>
+<p>which can be transformed into the evaluation formula</p>
+<p><span class="math display">\[
+cov(X_1, X_2)=E(X_1X_2)-E(X_1)E(X_2)
+\]</span></p>
+<p>To calculate covariance, one can calculate the expected value of the product of the two random variables and subtract the product of their expected values.</p>
+<p>What if you wanted to calculate the covariance of the random variable with itself?</p>
+<p><span class="math display">\[
+cov(X_1,X_1)=E[(X_1-E(X_1))*(X_1-E(X_1))]=E(((X_1-E(X_1))^2
+)=var(X_1)\]</span></p>
+<p>or</p>
+<p><span class="math display">\[
+cov(X_1,X_1)=E(X_1X_1)-E(X_1)E(X_1)=E(X_1^2)-(E(X_1))^2=Var(X_1)
+\]</span></p>
+<p>Variance is the specific case of the covariance; thus, the variance-covariance matrix describes all possible covariances.</p>
+<p>The last important property of covariance is its symmetry; from the evaluation formula</p>
+<p><span class="math display">\[
+cov(X_1,X_2)=E(X_1X_2)-E(X_1)E(X_2)=E(X_2X_1)-E(X_2)E(X_1)=cov(X_2,X_1)
+\]</span></p>
+<p>The variance-covariance matrix is thus square and symmetric, having marginal variances on the main diagonal. It is also positive semi-definite, an important property for various statistical techniques using sample variance-covariance matrices.</p>
+<p><span class="math display">\[
+\boldsymbol{\Sigma}= \begin{pmatrix} Var(X_1) &amp; cov(X_1,X_2) \\
+cov(X_2,X_1) &amp; Var(X_2)
+\end{pmatrix}
+\]</span></p>
+</section>
+<section id="correlation" class="level3">
+<h3 class="anchored" data-anchor-id="correlation">Correlation</h3>
+<p>The covariance describes the direction of the linear association, but its value is unbounded and depends on the units of the random variables. Thus, we cannot compare values of the covariances across different pairs of random variables. Here comes the standardised version of the covariance that bounds its values to the range [-1; 1]. This standardised covariance is called correlation and is calculated as</p>
+<p><span class="math display">\[
+\rho(X_1,X_2)=\frac{cov(X_1,X_2)}{\sqrt{Var(X_1)*Var(X_2)}}=\frac{cov(X_1,X_2)}{S.D.(X_1)S.D.(X_2)}
+\]</span></p>
+<p>The standardisation leads to a unitless value, which can be compared across different pairs of random variables. Value 0 still means a linearly independent pair of random variables; value -1 means that one random variable is a negative linear function of the other, and value 1 indicates that one random variable is a positive linear function of the other.</p>
+<p>Most commonly, the correlation is somewhere in between. There are no hard bounds to a strong or weak association, even though you might find some simplifying tables with given bounds in various scientific fields. These tables are usually created by looking at the common correlations in the given field. For example, in social sciences, a correlation of 0.6 is typically referred to as strong simply because it is very unusually high value in the social sciences. On the other hand, in physics, a correlation of 0.6 would be considered weak because the correlation coefficients are typically higher than that in physics.</p>
+<p>Correlation is also connected to the concept of <em>explained variability</em> in the linear regression analysis. This connection will be described in the chapter on two-dimensional normal distribution.</p>
+<p>The correlation of the random variable with itself yields a value of 1</p>
+<p><span class="math display">\[
+\rho(X_1,X_1)=\frac{cov(X_1,X_1)}{\sqrt{Var(X_1)*Var(X_1)}}=
+\frac{Var(X_1)}{Var(X_1)}=1
+\]</span></p>
+<p>and the correlation is again symmetric:</p>
+<p><span class="math display">\[
+\rho(X_2,X_1)=\frac{cov(X_2,X_1)}{\sqrt{Var(X_2)*Var(X_1)}}=\frac{cov(X_1,X_2)}{\sqrt{Var(X_1)*Var(X_2)}}=\rho(X_1,X_2)
+\]</span></p>
+<p>This together means that the correlation matrix is squared and symmetric, having values one on the main diagonal. This matrix is also a positive semidefinite</p>
+<p><span class="math display">\[
+\boldsymbol{\rho}= \begin{pmatrix}
+1 &amp; \rho(X_1, X_2) \\
+\rho(X_2, X_1) &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>To summarise, a random vector’s two main characteristics are a vector of expected values, which describes the location, and a variance-covariance matrix, which describes variability and linear relations inside the vector. The third commonly used characteristic is a correlation matrix, which recalculates a variance-covariance matrix to a standardised form, describing the linear relations inside the vector.</p>
+</section>
+</section>
+<section id="conditional-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-distribution">Conditional distribution</h2>
+<p>The joint distribution represents the intersection, and the marginal distribution represents the <em>independent</em> distribution so that the last distribution will represent the <em>conditional</em> distribution. The notation is changed; instead of <em>x</em><sub>1</sub> and <em>x</em><sub>2</sub>, <em>x</em> and <em>y</em> will be used for better clarity.</p>
+<p>It is calculated in a similar way we saw with the two random events, with the probability of intersection divided by the probability of a condition:</p>
+<p><span class="math display">\[
+P(x|y)=\frac{P(x,y)}{P(y)}
+\]</span></p>
+<p><span class="math display">\[ f(x|y)=\frac{f(x,y)}{f(y)} \]</span></p>
+<p>So, having joint distribution, we can calculate marginal distribution. And having both joint distribution and marginal distribution, we can calculate conditional distribution. If there is an association between the two variables, the conditional probability function or conditional probability density function will be a function of both the variable (<em>x</em>) and the condition (<em>y</em>).</p>
+<section id="regression-function" class="level3">
+<h3 class="anchored" data-anchor-id="regression-function">Regression function</h3>
+<p>The regression function in probability theory is a function of the expected value of one random variable under the condition of the other random variable (reminding we are now assuming only a two-dimensional vector) E(<em>X</em>|<em>y</em>). It is calculated the very same way as any expected value, but using conditional probability function or probability density function</p>
+<p><span class="math display">\[
+E(X|y)=\sum_{x=-\infty}^\infty x*P(x|y)
+\]</span></p>
+<p><span class="math display">\[ E(X|y)=\int_{x=-\infty}^\infty x*f(x|y)dx \]</span></p>
+<p>Mathematically, we eliminate X but not Y in the result by integrating or summing across values of random variable X. The conditional expected value <em>E</em>(<em>X</em>|<em>y</em>) is usually, but not necessarily, a function of <em>Y</em> in case there is a relation between the two variables. The conditional expected values are always constants if no association exists between X and Y.</p>
+</section>
+<section id="skedastic-function" class="level3">
+<h3 class="anchored" data-anchor-id="skedastic-function">Skedastic function</h3>
+<p>The skedastic function in probability theory is a function of the variance of one random variable under the condition of the other random variable (reminding we are now assuming only a two-dimensional vector) <em>Var</em>(<em>X</em>|<em>y</em>). It is calculated the very same way as any variance, but using conditional probability function or probability density function</p>
+<p><span class="math display">\[ E(X^2|y)=\sum_{x=-\infty}^\infty x^2*P(x|y) \]</span></p>
+<p><span class="math display">\[ E(X^2|y)=\int_{x=-\infty}^\infty x^2*f(x|y)dx \]</span></p>
+<p><span class="math display">\[
+Var(X|y)=E(X^2|y)-[E(X|y)]^2
+\]</span></p>
+<p>The conditional variance <em>Var</em>(<em>X</em>|<em>y</em>) is usually, but not necessarily, a function of <em>Y</em> in case there is a relation between the two variables. The conditional variances are always constants if no association exists between X and Y.</p>
+</section>
+</section>
+<section id="independence" class="level2">
+<h2 class="anchored" data-anchor-id="independence">Independence</h2>
+<p>We stumbled upon association and linear independence notions throughout the previous paragraphs. Let´s now formalise it a little.</p>
+<p>In the same way, we introduced the definition of independence of two random events, we can start here</p>
+<p><span class="math inline">\(P(x|y)=P(x);f(x|y)=f(x);F(x|y)=F(x)\)</span> for each possible value <em>x</em> and <em>y</em>.</p>
+<p>Basically, we claim that the two random variables are independent if the conditioning on one random variable does not change the probability distribution of the second one.</p>
+<p>From this, we can follow with the condition of independence,</p>
+<p><span class="math display">\[
+P(x,y)=P(x)*P(y)
+\]</span></p>
+<p><span class="math display">\[
+f(x,y)=f(x)*f(y)
+\]</span></p>
+<p><span class="math display">\[
+, soF(x,y)=F(x)*F(y)
+\]</span></p>
+<p>This condition is both necessary and sufficient, meaning that if we can show one of these relations, the two random variables are independent, and if the two random variables are independent, then we can assume these relations.</p>
+<p>Covariance and correlation were introduced as measures of linear association. The regression function was introduced to describe how one random variable’s expected values react to the other’s values. Similarly, the skedastic function describes conditional variances. What are some takeaway points on these descriptions of relations and general independence?</p>
+<ul>
+<li><p>A linear relation can be described as a relation in which the regression function is close to the straight line.</p></li>
+<li><p>The regression function can take any shape, and no linearity is required (!). If the regression function is, <em>on</em> <em>average</em>, increasing, the correlation is positive, and if the regression function is, <em>on</em> <em>average</em>,decreasing, the correlation is negative.</p></li>
+<li><p>A higher correlation value is connected to the regression function being close to the straight line and the skedastic function being close to 0.</p></li>
+<li><p>Suppose one random variable is a linear function of the other. In that case, the regression is a straight line, and there is no conditional variability, so the skedastic function is equal to 0.</p></li>
+<li><p>If the two random variables are independent, thequalsey are also linearly independent, so covariance and correlation are 0. Also, regression and skedastic functions are constant.</p></li>
+<li><p>The opposite is not necessarily true! There can be non-linear relations such that covariance and correlation equal 0. Two random variables can even be dependent in such a way that regression or skedastic function is constant.</p></li>
+</ul>
+</section>
+<section id="mutual-information" class="level2">
+<h2 class="anchored" data-anchor-id="mutual-information">Mutual Information</h2>
+<p>Even though the correlation coefficient is the most commonly used measure of the strength of the relation, it has a few flaws, most notably a connection to linearity and a less obviously hard interpretation of values. However, there are other ways to measure the strength of the association of the two random variables.</p>
+<p>The one introduced here is connected to the information theory and notion of entropy introduced in the chapter on characteristics of random variables. We will continue using this characteristic only to measure the strength of the association of discrete random vectors.</p>
+<p>Statistically speaking, mutual information is measured as the Kullback-Leibler divergence (type of distance measure) between the joint probability distribution and probability distribution under the condition of independence. Kullback-Leibler divergence of one random variable from the other is</p>
+<p><span class="math display">\[
+D_{KL}(P||Q)=\sum_{x\in{X}}P(x)*log \left( \frac{P(x)}{Q(x)} \right)
+\]</span></p>
+<p>Using joint probability function <span class="math inline">\(P(x)=P(x,y)\)</span> and condition of independence <span class="math inline">\(Q(x)=P(x)*P(y)\)</span>, we have definition of mutual information</p>
+<p><span class="math display">\[
+I(X;Y)=\sum_{y\in{Y}} \sum_{x\in{X}}P(x,y)*log \left(
+\frac{P(x,y)} {P(x)*P(y)}
+\right)
+\]</span></p>
+<p>Apart from the definition, mutual entropy can be calculated using various formulas. One of them uses entropies of marginal random variables and joint random vector</p>
+<p><span class="math display">\[
+I(X;Y)=H(X)+H(Y)-H(X;Y)
+\]</span></p>
+<p>The entropy of the random vector is calculated the same way the entropy of random variables</p>
+<p><span class="math display">\[
+H(X;Y)=-\sum_{y\in{Y}} \sum_{x \in {X}}P(x,y)*log_b{P(x,y)}
+\]</span></p>
+<p>The formula for calculating mutual information from the entropies shows that mutual information is the information content of both random variables minus the information content of their joint distribution.</p>
+<p>Translated, it means that mutual information quantifies how much knowing the value of one random variable reduces uncertainty about the other random variable, measured, e.g.&nbsp;in bits, nats or dits.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="_site/Pics/MI.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Mutual information</figcaption>
+</figure>
+</div>
+<p>The mutual information has a clear advantage in covering all types of relations between the two random variables, not only linear. Also, if mutual information is 0, the two random variables are independent. It is also symmetric: <span class="math inline">\(I(X;Y)=I(Y;X)\)</span>.</p>
+<section id="uncertainty-coefficients" class="level3">
+<h3 class="anchored" data-anchor-id="uncertainty-coefficients">Uncertainty coefficients</h3>
+<p>Mutual information provides information gain in one variable by observing the second variable in bits (or other units depending on the base of logarithms used). The trouble is that the maximal information content depends on the number of possible values of the random variable, as discussed in the chapter on entropy. So sometimes, the need to use the normalised version that can provide us with relative information gain might be useful. The logic behind the uncertainty coefficient is that it will tell us what information gain is in one random variable by knowing the value of the second random variable provided as the percentage of the entropy, and thus maximal possible information gain, of that first random variable.</p>
+<p><span class="math display">\[
+U(X|Y)=\frac{I(X,Y)}{H(X)}\neq U(Y|X)=\frac{I(Y,X)}{H(Y)}
+\]</span></p>
+<p>Uncertainty coefficients are not generally symmetric because the two random variables usually have different entropies.</p>
+<p>To repeat:</p>
+<ul>
+<li><p>Absolute information gain, mutual entropy, is symmetric.</p></li>
+<li><p>Relative information gain, uncertainty coefficient, is not (generally) symmetric.</p></li>
+</ul>
+<p>To finish this chapter, let´s introduce one of the possible symmetric uncertainty coefficients. This answers the question, what is an average relative information gain in one variable by knowing the value of the second variable, assuming we do not know which of the two is known?</p>
+<p><span class="math display">\[
+U(X,Y)=\frac{H(X)*U(X|Y)+H(Y)*U(Y|X)}{H(X)+H(Y)}=\frac{2*I(X,Y)}{H(X)+H(y)}
+\]</span></p>
+<p>This symmetric uncertainty coefficient is calculated as an entropy-weighted uncertainty coefficients.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
