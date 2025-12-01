@@ -8,7 +8,7 @@
 
 <meta name="author" content="Adam Cabla">
 
-<title>Course Introduction – 4ST621</title>
+<title>Hypothesis testing - introduction – 4ST621</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -113,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Course_Intro.html">Course Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LN9.html">Mathematical Statistics</a></li><li class="breadcrumb-item"><a href="./LN11.html">Hypothesis testing - introduction</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -127,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Course_Intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Course_Intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Course Introduction</span></a>
   </div>
 </li>
@@ -213,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LN11.html" class="sidebar-item-text sidebar-link">
+  <a href="./LN11.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Hypothesis testing - introduction</span></a>
   </div>
 </li>
@@ -230,15 +259,36 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#epistemology" id="toc-epistemology" class="nav-link" data-scroll-target="#epistemology">Epistemology</a>
+  <ul class="collapse">
+  <li><a href="#statistical-inference-as-a-part-of-the-scientific-process" id="toc-statistical-inference-as-a-part-of-the-scientific-process" class="nav-link" data-scroll-target="#statistical-inference-as-a-part-of-the-scientific-process">Statistical Inference as a Part of the Scientific Process</a></li>
+  <li><a href="#causality" id="toc-causality" class="nav-link" data-scroll-target="#causality">Causality</a></li>
+  </ul></li>
+  <li><a href="#general-frequentist-approach" id="toc-general-frequentist-approach" class="nav-link" data-scroll-target="#general-frequentist-approach">General Frequentist Approach</a>
+  <ul class="collapse">
+  <li><a href="#lady-lasting-tea" id="toc-lady-lasting-tea" class="nav-link" data-scroll-target="#lady-lasting-tea">Lady Lasting Tea</a></li>
+  </ul></li>
+  <li><a href="#the-two-origins-of-the-nhst" id="toc-the-two-origins-of-the-nhst" class="nav-link" data-scroll-target="#the-two-origins-of-the-nhst">The Two Origins of the NHST</a>
+  <ul class="collapse">
+  <li><a href="#fishers-significance-testing" id="toc-fishers-significance-testing" class="nav-link" data-scroll-target="#fishers-significance-testing">Fisher´s Significance Testing</a></li>
+  <li><a href="#neyman-pearsons-hypothesis-testing" id="toc-neyman-pearsons-hypothesis-testing" class="nav-link" data-scroll-target="#neyman-pearsons-hypothesis-testing">Neyman-Pearson´s Hypothesis Testing</a></li>
+  <li><a href="#null-hypothesis-significance-testing" id="toc-null-hypothesis-significance-testing" class="nav-link" data-scroll-target="#null-hypothesis-significance-testing">Null Hypothesis Significance Testing</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LN9.html">Mathematical Statistics</a></li><li class="breadcrumb-item"><a href="./LN11.html">Hypothesis testing - introduction</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Course Introduction</h1>
+<h1 class="title">Hypothesis testing - introduction</h1>
 </div>
 
 
@@ -261,16 +311,117 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the course 4ST621 – Probability Theory and Mathematical Statistics I.</p>
-<p>As the name suggests, this course has two main parts. So, what is the difference between probability and statistics?</p>
-<p>In probability theory, we deal with the following question: Given some assumptions about the generating process, what can we say about (possible) data?</p>
-<p>In (inferential) statistics, we ask quite the opposite question: Given the data, what can we say about the (possible) generating process? &nbsp;</p>
-<p>In the first (longer) part, we will start with some basic terms and operations used upon probabilities, which will lead us to the Bayes theorem, a potent tool for thinking about data. Then, we will move to random variables, distributing probabilities among real numbers and what characteristics can come from these distributions. Generalising into two dimensions, we will also add problematics of relations between random variables. Then, with some general ideas in mind, we will move to specific probability distributions, or probabilistic models, arising from various assumptions. This tour is finished with stochastic convergences, which provide reasoning machinery for inferential statistics, connecting it with the probability theory.</p>
-<p>In the second (shorter) part, we will start with the basics of sampling – how data come into existence and how we can use stochastic convergences or some other assumptions to model the probability distribution of various statistics. We will make a slight detour into the area of point estimates to cover important notions of estimators’ variability and bias. After this, we will return to the sampling theory and see how to use it to test various claims about the generating process. Hypothesis testing is an essential tool in the statistical bag if done correctly, which is not so easy without understanding some basic and often overlooked philosophical connections. To finish the course, we will introduce confidence intervals, which are dual to hypothesis testing but bring additional information.</p>
-<p>This course is by no means a complete treatise on the subjects outlined in the previous paragraphs. It is rather an introductory, sometimes more and sometimes less comprehensive, into the topics.</p>
-<p>Please avoid falling into the Dunning-Kruger-like trap of being overconfident after learning the basics.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this chapter, we are getting into the core of the inferential part of this course - statistical hypothesis testing. In the rough distinction, we can assume there are three core tasks of statistics as a whole: description (exploration), prediction, and inference. So let´s ask the core question: Is it enough to describe data? Do the data speak for themselves?</p>
+<p>As the first question goes, it may be sufficient to describe the data, depending on the stage of the entire process we are in. As for the second question, my answer is a loud ‘no.’ Data never speaks for itself. Even in exploratory research, decisions must be made about what to explore and how to present the findings. Especially in a multivariate setting, several possibilities need to be considered.</p>
+<p>But let us now turn to the inference: our question is not focused on how the data looks, but how it came into existence; what is its generating process? What is generalizable and under which assumptions?</p>
+<p>Statistical hypothesis testing should be closely tied to either the scientific process or the decision-making process.</p>
+</section>
+<section id="epistemology" class="level2">
+<h2 class="anchored" data-anchor-id="epistemology">Epistemology</h2>
+<p>Epistemology is a branch of philosophy that deals with the important topic of how humans acquire knowledge and how we should acquire it. It has a rich history filled with many famous names, from ancient Greeks to philosophers such as Descartes, Hume, Kant, and Mill. However, we will briefly introduce the one who shook the field in the first half of the 20th century: Karl Popper and his followers, known as critical rationalists.</p>
+<p>What was so revolutionary about Karl Popper? His idea of falsificationism. Up until this point, knowledge was considered to be justified true belief, and the means of this justification were the most debated issue - whether we can justify a belief via reasoning (rationalism) or via observation (empiricism). Science used to be considered something built <em>via positiva</em> - by adding and accumulating knowledge in usually small steps.</p>
+<p>But the novel idea here was that science should be built <em>via negativa</em> - by subtracting; trying to falsify what we believe. In the end, knowledge ought to be a collection of ideas that survived rigorous testing and were put in <em><strong>mortal danger</strong>.</em></p>
+<p>As a side note, there is a humorous caricature reference to this in the work of the famous Czech (imaginary) genius Jara da Cimrman - at the beginning, there is an error, but totally precise; in the process, we are falsifying this error, and at the end, we completely falsify the error, and we know nothing.</p>
+<section id="statistical-inference-as-a-part-of-the-scientific-process" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-inference-as-a-part-of-the-scientific-process">Statistical Inference as a Part of the Scientific Process</h3>
+<p>In a general scientific approach, following critical rationalist epistemology, statistical hypothesis testing is a part of a more comprehensive and lengthy process, which we can call the scientific process. In the optimal route, the first step is to establish a general principle or <em>grand</em> theory. From this theory, a set of research hypotheses that are potentially falsifiable through empirical means should naturally follow. At this step, statistical hypothesis testing plays a role in determining whether we have sufficient empirical evidence to reject a particular statistical hypothesis connected to a research hypothesis or not. As a prime example, Popper used the famous Eddington experiment to illustrate how it should work.</p>
+<section id="eddington-experiment" class="level4">
+<h4 class="anchored" data-anchor-id="eddington-experiment">Eddington experiment</h4>
+<p>Einstein first hinted at the bending of light in a 1911 paper, predicting that gravity would bend the light. At that time, the effect was calculated using a preliminary approach, giving a modest prediction. By 1915, with the full formulation of General Relativity, Einstein doubled the expected deflection. These papers were revolutionary—they challenged centuries of Newtonian certainty and set the stage for a grand empirical test.</p>
+<p>Newtonian gravity agreed in principle with the bend of light, but predicted only half the deflection Einstein calculated—about 0.87 arcseconds versus 1.75 arcseconds.</p>
+<p>The opportunity came in 1919 during a total solar eclipse. Eddington and his crew used locations in Africa and South America to photograph stars near the Sun’s edge during the eclipse and compared their positions to normal nights.</p>
+<p>The result? The observed deflection matched Einstein’s prediction, not Newton’s, shaking the foundations of physics as they were known.</p>
+</section>
+</section>
+<section id="causality" class="level3">
+<h3 class="anchored" data-anchor-id="causality">Causality</h3>
+<p>Causality is one of the most profound questions in science: what does it mean for X to cause Y? How can we prove that? Philosophers and statisticians have wrestled with this for centuries. Here is a brief tour through some of the ideas that emerged on this topic, tightly related to statistical inference.</p>
+<p>Hume was one of the first to try to precisely define causality in this way: <em>X</em> causes <em>Y</em> <em>iff</em> (if and only if) without X, Y would not occur. He emphasized temporal precedence (X before Y) and spatial connection (X at the same space as Y).</p>
+<p>This works well for deterministic causality—where X <em>always</em> leads to Y—but reality is rarely so neat. Lung cancer can occur without smoking. Hence, we adopt probabilistic causality: X increases the probability of Y: <span class="math inline">\(P(Y|X)&gt; P\left(Y|\bar{X}\right)\)</span>. However, this leads to a problem: for causality to exist, association is sufficient; yet this is simply not true - a simple connection between two variables is not sufficient, even with temporal and spatial connections, because the relations might be complex and hidden from our direct observations.</p>
+<p>This leads to Pearl´s contribution, who distinguished between simple observation and intervention, so-called do-operator: <span class="math inline">\(P(Y|do(X))&gt; P\left(Y|do\left(\bar{X}\right)\right)\)</span>.</p>
+<p>For example, observing an umbrella increases the likelihood of observing rain, whereas bringing an umbrella does not.</p>
+<p>How can we find out causality? The distinction leads to a theoretical background that explains why experiments are crucial for disentangling causality from association: in experiments, you directly manipulate one variable and observe the effect on the second.</p>
+<p>A fundamental and crucial term in the field of experiments is randomization. The units you are manipulating in experiments need to be randomized into two groups: manipulated and non-manipulated. That’s because in statistics, we usually rely on the notion of independence and identical probability distributions, which is what proper randomization ensures, decreasing sampling sources of bias.</p>
+<p>Randomization does not ensure the exact distributions in the sample (for example, equal proportions of males and females in the manipulated and non-manipulated groups), but it does provide equal opportunity to be assigned to the groups, regardless of sex.</p>
+<p>On the other hand, in a standard observation-based study, you just observe. Yet, you can still attempt to infer causality from observational studies using more or less complicated statistical tools, known under the umbrella term “causal inference.” There is a price to be paid, however, as no free lunches exist, and the price is having to rely on assumptions and choices about how the relation works in your theory.</p>
+</section>
+</section>
+<section id="general-frequentist-approach" class="level2">
+<h2 class="anchored" data-anchor-id="general-frequentist-approach">General Frequentist Approach</h2>
+<p>So how does it practically work? We can find 4 steps in a general frequentist approach.</p>
+<p><strong>Step 1:</strong> Based on the research question, the statistical null hypothesis (that ought to be nullified) is formulated in the form of equality.</p>
+<p><strong>Step 2a:</strong> Based on the null hypothesis, the test criterion (also known as the test statistic) is chosen. The choice is led by logic that you need to somehow connect the null hypothesis with the data, and that the test criterion should have <em>the best</em> properties regarding a specific hypothesis test.</p>
+<p><strong>Step 2b</strong>: The null model, which represents the probability distribution of the chosen test criterion under the assumption that the null hypothesis is true, is formulated. It can be done analytically using sampling distributions or using simulation-based approaches.</p>
+<p><strong>Step 2c</strong>: Value of the test criterion is calculated.</p>
+<p><strong>Step 3:</strong> We consider whether the value of the test criterion is too extreme under the null model (and hence under the assumption that the null hypothesis is true).</p>
+<p>What is extreme is based on the pre-selected probability threshold, known as the significance level <span class="math inline">\(\alpha\)</span>. The significance level is the probability of incorrectly rejecting the null hypothesis (meaning the null hypothesis is true, but you reject it) and is chosen subjectively, usually based on the convention (in social sciences, for example, the conventional significance level is 0.05)</p>
+<p>Therefore, the value of the test criterion can be considered too extreme if it falls among the <span class="math inline">\(\alpha\%\)</span> most extreme possible values of the null model. We have two options: either find the quantile of the null model that cuts off those 𝛼% and formulate what is known as the rejection region 𝑊𝛼; or we can calculate the probability of obtaining a value of the calculated test criterion or more extreme under the null model, referred to as the tail probability. This is known as the p-value.</p>
+<p><strong>Step 4:</strong> In the end, we find out whether the calculated value of the test criterion is too extreme, i.e., whether it falls within the rejection region <span class="math inline">\(W_\alpha\)</span> or its p-value is smaller than <span class="math inline">\(\alpha\)</span>. Based on this, we determine the result of the statistical test - rejecting or not rejecting the null hypothesis.</p>
+<p>As you can see, the statistical tests are counterfactual in their construction - we assume the null hypothesis is true and then set out to determine whether, based on the data, we have sufficient evidence against this assumption.</p>
+<p>What are the practical implications of the statistical test results is, however, a more complicated question.</p>
+<section id="lady-lasting-tea" class="level3">
+<h3 class="anchored" data-anchor-id="lady-lasting-tea">Lady Lasting Tea</h3>
+<p>One afternoon at the famous Rothamsted research base, Ronald A. Fisher offered a cup of tea with milk to his colleague, well-known algogist Muriel Bristol. She refused it because he poured the tea first and added the milk later, which she disliked.</p>
+<p>Fisher thought she was kidding him, but the third colleague at the station, William Roach, saw an opportunity for a funny test. They poured 8 cups of tea, 4 of which were poured with tea first and the other 4 with milk first.</p>
+<p><strong>Research question</strong>: Does Bristol truly recognize the order of the pouring by simply tasting?</p>
+<p><strong>Statistical null hypothesis:</strong> She guesses randomly</p>
+<p><strong>Statistical test criterion:</strong> Anumber of 4 cups Bristol highlights, which truly have poured milk first.</p>
+<p><strong>Null model:</strong> Hypergeometric distribution. If the null hypothesis is true and she guesses randomly, the number of cups with milk poured first in her chosen four cups will follow the hypergeometric distribution.</p>
+<p><strong>Data:</strong> Among the four cups highlighted by Bristol, all four had milk poured into them first.</p>
+<p><strong>Rejection region:</strong> Assuming 5% significance level, only recognizing all four cups would lead to the rejection of the null hypothesis. Which it did.</p>
+<p><strong>P-value</strong>: Probability that she would recognize all four (or more, in a general setting) cups assuming she guesses randomly (and hence the null hypothesis is true) is <span class="math inline">\(1/70\approx0.014\)</span>, which is below the assumed significance level.</p>
+<p><strong>Decision:</strong> The null hypothesis was rejected.</p>
+<p><strong>Conclusion:</strong> Even with the rejection of the null hypothesis, one statistical test can still be considered insufficient evidence to decide the research question with sufficient certainty, but it can lead us to be more inclined to believe Bristol´s claim. So maybe more data is needed.</p>
+</section>
+</section>
+<section id="the-two-origins-of-the-nhst" class="level2">
+<h2 class="anchored" data-anchor-id="the-two-origins-of-the-nhst">The Two Origins of the NHST</h2>
+<p>Modern-day statistical testing usually relies heavily upon a specific kind of frequentist approach, known as null hypothesis significance testing (NHST). This approach emerged as a compromise between the two historical approaches that developed in the 1920s and 1930s.</p>
+<section id="fishers-significance-testing" class="level3">
+<h3 class="anchored" data-anchor-id="fishers-significance-testing">Fisher´s Significance Testing</h3>
+<p>Ronald A. Fisher, known for the story of Muriel Bristol, was the first statistician to establish a formal procedure for statistical testing, commonly referred to as significance testing. This approach focuses on the null hypothesis and p-value calculation, centered on evaluating how discordant the data are from the null hypothesis.</p>
+<p>The Fisher approach sets out only the null hypothesis, collects data, and calculates the p-value of the chosen test criterion (usually based on something called the minimal sufficient statistic), and if the p-value is small enough, it makes a dual claim: “<em>Either a rare result occurred or the null hypothesis does not explain the research results satisfactorily.</em>”</p>
+<p>In this approach, rejecting the null hypothesis at a specific significance level <span class="math inline">\(\alpha\)</span> means the test result is <em>statistically significant</em>.</p>
+</section>
+<section id="neyman-pearsons-hypothesis-testing" class="level3">
+<h3 class="anchored" data-anchor-id="neyman-pearsons-hypothesis-testing">Neyman-Pearson´s Hypothesis Testing</h3>
+<p>A few years after Fisher, with an acknowledgment of his inspiration, Egon Pearson, along with Jerzy Neyman, published their approach to hypothesis testing, differing in important details from the original one.</p>
+<p>This approach focuses on establishing two competing statistical hypotheses - the main (akin to the null) and the alternative. These two hypotheses are set as points, with a difference between them being the difference of interest.</p>
+<p>Having two competing hypotheses, the researcher should consider not only the significance level 𝛼 but also the level of error associated with the other hypothesis, <span class="math inline">\(\beta\)</span>. While the first probability is the probability of incorrectly rejecting the main hypothesis (it is true, but you reject it):</p>
+<p><span class="math display">\[
+P(reject\ H_M|H_M)=\alpha
+\]</span></p>
+<p>The second probability is the probability of incorrectly NOT rejecting the main hypothesis (it is not true, but you fail to reject it):</p>
+<p><span class="math display">\[
+P(not \ reject \ H_M|H_A)=\beta
+\]</span></p>
+<p>The second probability is more often expressed in its complement <span class="math inline">\(1-\beta\)</span>, which is called the power of the test and will be the focus of another page.</p>
+<p>Generally speaking, this approach is more concerned with deciding between the two hypotheses and research planning, in which 𝛼 is set as usual, and 𝛽 is calculated accordingly.</p>
+<p>The decision of the test is more complicated here:</p>
+<ul>
+<li><p>You can reject the main hypothesis and accept the alternative (if your p-value is small enough).</p></li>
+<li><p>You can reject the alternative and accept the main hypothesis (if your p-value is not small enough and you had high power of the test).</p></li>
+<li><p>You can remain undecided on an occasion, in which your p-value is not low enough (so you can´t make a call against the main hypothesis), but your power <span class="math inline">\(1-\beta\)</span> is too low (so you can´t make a call against the alternative hypothesis either).</p></li>
+</ul>
+<p>The last situation should be avoided in a research planning phase - you should aim for enough observations to have enough power. Neyman and Pearson generally recommended power to be at least 80%.</p>
+</section>
+<section id="null-hypothesis-significance-testing" class="level3">
+<h3 class="anchored" data-anchor-id="null-hypothesis-significance-testing">Null Hypothesis Significance Testing</h3>
+<p>In the most common approach, the null hypothesis <span class="math inline">\(H_0\)</span> is set up as equality, and the alternative hypothesis <span class="math inline">\(H_1\)</span> is set up as ordinal from the null (inequality).</p>
+<p>When planning research, the power should be focus, but the power is constructed more complexly, because there is no point alternative (remember, to calculate any probability, you need to have a point hypothesis).</p>
+<p>The most commonly used test criteria for simple tests were derived from the concept of t<em>he uniformly most powerful test</em> and the <em>Neyman-Pearson lemma</em>. These test criteria have the highest power among all the possibilities, ceteris paribus.</p>
+<p>After the test results are known, the decision is made to:</p>
+<ul>
+<li><p>Reject the null hypothesis in favor of the alternative (if p-value is low enough or the value of the test criterion falls into the rejection region)</p></li>
+<li><p>Not to reject the null hypothesis in favor of the alternative (if the p-value is not low enough or the value of the test criterion does not fall into the rejection region)</p></li>
+</ul>
+<p>No matter the decision made, there still needs to be a lot of caution. Always remember that a single statistical test result, on its own, usually tells us very little without additional context, such as how the statistical test relates to the research question, how it was chosen, or how the data were collected. Statistical hypothesis testing is only a part of a bigger picture.&nbsp;</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
