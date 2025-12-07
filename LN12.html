@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Adam Čabla">
 
-<title>4ST621</title>
+<title>Hypothesis Testing - Other Considerations – 4ST621</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -90,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -98,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./Course_Intro.html"> 
+    <a class="nav-link active" href="./Course_Intro.html" aria-current="page"> 
 <span class="menu-text">Course Introduction</span></a>
   </li>  
 </ul>
@@ -112,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">4ST621</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LN9.html">Mathematical Statistics</a></li><li class="breadcrumb-item"><a href="./LN12.html">Hypothesis Testing - Other Considerations</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -184,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LN8.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Stochastic Convergences</span></a>
+ <span class="menu-text">Stochastic convergences</span></a>
   </div>
 </li>
       </ul>
@@ -207,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./LN10.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Point Estimates</span></a>
+ <span class="menu-text">Point estimates</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -218,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./LN12.html" class="sidebar-item-text sidebar-link">
+  <a href="./LN12.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Hypothesis Testing - Other Considerations</span></a>
   </div>
 </li>
@@ -235,21 +265,46 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#return-of-the-lady-lasting-tea-power-of-the-test" id="toc-return-of-the-lady-lasting-tea-power-of-the-test" class="nav-link active" data-scroll-target="#return-of-the-lady-lasting-tea-power-of-the-test">Return of the Lady Lasting Tea: Power of the test</a>
+  <ul class="collapse">
+  <li><a href="#power-of-the-test-in-the-example-of-the-z-test" id="toc-power-of-the-test-in-the-example-of-the-z-test" class="nav-link" data-scroll-target="#power-of-the-test-in-the-example-of-the-z-test">Power of the test in the example of the Z-test</a></li>
+  <li><a href="#hence" id="toc-hence" class="nav-link" data-scroll-target="#hence">Hence…</a></li>
+  </ul></li>
+  <li><a href="#practical-considerations" id="toc-practical-considerations" class="nav-link" data-scroll-target="#practical-considerations">Practical considerations</a>
+  <ul class="collapse">
+  <li><a href="#choosing-sample-size" id="toc-choosing-sample-size" class="nav-link" data-scroll-target="#choosing-sample-size">Choosing sample size</a></li>
+  <li><a href="#target-effect-size" id="toc-target-effect-size" class="nav-link" data-scroll-target="#target-effect-size">Target effect size</a></li>
+  <li><a href="#statistical-significance" id="toc-statistical-significance" class="nav-link" data-scroll-target="#statistical-significance">Statistical significance</a></li>
+  <li><a href="#understanding-p-value" id="toc-understanding-p-value" class="nav-link" data-scroll-target="#understanding-p-value">Understanding p-value</a></li>
+  <li><a href="#attacks-on-p-values-and-statistical-testing-in-general" id="toc-attacks-on-p-values-and-statistical-testing-in-general" class="nav-link" data-scroll-target="#attacks-on-p-values-and-statistical-testing-in-general">Attacks on p-values and statistical testing in general</a></li>
+  </ul></li>
+  <li><a href="#closing-remarks" id="toc-closing-remarks" class="nav-link" data-scroll-target="#closing-remarks">Closing remarks</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./LN9.html">Mathematical Statistics</a></li><li class="breadcrumb-item"><a href="./LN12.html">Hypothesis Testing - Other Considerations</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">4ST621</h1>
+<h1 class="title">Hypothesis Testing - Other Considerations</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Adam Čabla </p>
+          </div>
+  </div>
     
   
     
@@ -260,9 +315,89 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This is website dedicated to the 4ST621 course Probability and Mathematical Statistics 1.</p>
+<section id="return-of-the-lady-lasting-tea-power-of-the-test" class="level2">
+<h2 class="anchored" data-anchor-id="return-of-the-lady-lasting-tea-power-of-the-test">Return of the Lady Lasting Tea: Power of the test</h2>
+<p>Let us return to the Lady Lasting Tea. She recognized all four cups with milk poured first out of the eight that were put in front of her, and we could lean on the belief in her. But what was her chance of doing so? If she could recognize it every time, she couldn’t fail the Fischer´s test, but what if she could, from time to time, be mistaken?</p>
+<p>For example, what if her true ability to identify the milk first order was 70%? If you recall, the null hypothesis was that she was randomly guessing, so this chance was set at 50 %. Clearly, even if her ability was partial, the null hypothesis should have been rejected, and we want to know what the probability of doing so was. Formulating this in probability terms, we want to know <span class="math inline">\(P(H_0 \text{ rejected}|H_1\text{ true})\)</span>, which we refer to as the power of the test.</p>
+<p>To reject the null hypothesis, either the p-value has to be low or the value of the test criterion (TC) has to be in the rejection region. Using the latter, we can rewrite the power of the test as</p>
+<p><span class="math display">\[ P(TC \in W_\alpha |H_1) \]</span></p>
+<p>And specifically for the Lady Lasting Tea example, with true ability set at 0.7 as <span class="math display">\[P(X=4|\pi=0.7)\]</span>Now, without random guessing, we will not construct this probability as hypergeometric, but approximate it using the binomial distribution <span class="math inline">\(X\approx Bi(n=4,\pi=0.7)\)</span> and power is <span class="math inline">\(\approx 0.2401\)</span>.</p>
+<p>(Real probability calculation would be more complicated and require us to set up not only the true positive probability of 0.7, but also the false positive probability, and think about how she would fit her decision into the limited space of selection of 4 cups if she thought there were, for example, 3 or 5)</p>
+<p>So, if her true ability to recognize cup pouring milk first is limited, her <em>winning</em> the test is not a sure thing, but rather a random event with a given probability, which is the power of the test.</p>
+<p>Obviously, this probability, the power, is dependent on Bristol´s true ability to recognize the order of the pouring - the better she can, the higher the power is, and the more likely it is for her to pass the test. For example, to pass the test with a 0.8 probability, her true ability expressed via a binomial distribution would have to be around 95%.</p>
+<section id="power-of-the-test-in-the-example-of-the-z-test" class="level3">
+<h3 class="anchored" data-anchor-id="power-of-the-test-in-the-example-of-the-z-test">Power of the test in the example of the Z-test</h3>
+<p>The Z-test is a play model due to its simplicity. We assume data come from a normal distribution with <span class="math inline">\(\sigma\)</span> known. In this case, the pivot to test the hypothesis about the value of <span class="math inline">\(\mu_0\)</span> can be constructed as a standardized sample mean.</p>
+<p><span class="math display">\[ Z=\frac{\bar{X}-\mu_0}{\sigma}*\sqrt{n}\sim N(0;1) \]</span></p>
+<p>This is the null model (probability distribution assuming <span class="math inline">\(H_0:\mu=\mu_0\)</span>), and the rejection region for the one-sided alternative hypothesis <span class="math inline">\(H_1:\mu&gt;\mu_0\)</span> will be</p>
+<p><span class="math display">\[ W_\alpha=\{z;z\geq z_{1-\alpha} \} \]</span></p>
+<p>Denoting the point alternative hypothesis that is in line with the ordinal alternative hypothesis above as <span class="math inline">\(H_1:\mu=\mu_1&gt;\mu_0\)</span>, we want to calculate the power of the test as</p>
+<p><span class="math display">\[ P(Z\geq z_{1-\alpha}|\mu_1)=P\left(\frac{\bar{X}-\mu_0}{\sigma}\sqrt{n}\geq z_{1-\alpha}  |\mu_1 \right)=P\left( \bar{X} \geq \mu_0 + \frac{z_{1-\alpha}\sigma}{\sqrt{n}} | \mu_1\right) \]</span></p>
+<p>And with the assumption of <span class="math inline">\(\mu=\mu_1\)</span>, we know that</p>
+<p><span class="math display">\[ \bar{X}\sim N\left(\mu_1;\frac{\sigma}{\sqrt{n}}\right) \]</span></p>
+<p>and can calculate the given probability, that is, the power of the test.</p>
+</section>
+<section id="hence" class="level3">
+<h3 class="anchored" data-anchor-id="hence">Hence…</h3>
+<p>From this example, we can see three main factors influencing the power of the test, which are generally always present:</p>
+<p>1./ <strong>Effect size</strong>: the larger the difference between the true value and the null hypothesis is, the more powerful the test is.</p>
+<p>2./ <strong>Sample size</strong>: the more observations we have, the more powerful the test is.</p>
+<p>3./ <strong>Significance level</strong>: even though little hidden, the larger the significance level is, the larger the power is as well.</p>
+<p>The last one expresses a trade-off between the two possible errors that can be made; the more we expose ourselves to the type I error (incorrectly rejecting <span class="math inline">\(H_0\)</span> with probability <span class="math inline">\(\alpha\)</span>), the less we expose ourselves to the type II error (incorrectly not rejecting <span class="math inline">\(H_0\)</span> with probability <span class="math inline">\(\beta\)</span>, complement of the power) and vice versa.</p>
+</section>
+</section>
+<section id="practical-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="practical-considerations">Practical considerations</h2>
+<p>Collecting data is never free - it costs money, time, or attention. Additionally, each subsequent observation provides less information than the previous one. This means that, as researchers, we face trade-offs when considering the question: how much data is enough?</p>
+<section id="choosing-sample-size" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-sample-size">Choosing sample size</h3>
+<p>Choosing the sample size is a crucial yet often overlooked consideration. In practice, we usually resort to the data already collected; that is, we cannot influence this. In the event that we design the research plan, however, we have several alternatives that depend on the question being asked. We can base our approach on the precision of the point estimate (or the width of the desired confidence interval) or decide on the acceptable error rates, particularly the power. However, the costs are always present, so a cost-benefit analysis is the optimal approach (e.g., how much can we increase the power with additional costs).</p>
+</section>
+<section id="target-effect-size" class="level3">
+<h3 class="anchored" data-anchor-id="target-effect-size">Target effect size</h3>
+<p>We can decide on the sample size and the trade-off between <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, but we cannot decide on the effect size - it is there, it is objective, and we cannot negotiate it.</p>
+<p>The true power is never known, because the true effect size is never known!</p>
+<p>However, we can circumvent this issue by specifying our effect size of interest: what effect size do we want to be able to detect with a given power? This is a subjective choice, hopefully based on domain expertise. We can also consider different effect sizes of interest and aim for specific power levels for each of them.</p>
+<p>Beware, though, that these power calculations are often more of a rough estimate than something precise. For example, we do not know the exact variability, which is necessary for probabilistic calculations, and must be estimated before data collection begins.</p>
+<p>With all the issues in mind, do not let the perfect be the enemy of the good.</p>
+<p>Regarding the post-hoc analysis, we can still perform power-based calculations, even though the questions differ in nature. For instance, assuming various effects, what were the power levels for these effects based on our data?</p>
+<p>We are not planning for the sample size to achieve a given power level; instead, we are using a known sample size (and variability or other information) to analyze what was actually possible to achieve.</p>
+</section>
+<section id="statistical-significance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-significance">Statistical significance</h3>
+<p>Numerous misconceptions plague statistical hypothesis testing; let’s address some of them.</p>
+<p>One of the most common is mixing <em>statistical significance</em> with the practical meaning. As stated earlier, the term “statistically significant” indicates that the null hypothesis has been rejected. It does not inform us whether this is practically meaningful or not.</p>
+<p>We can reject the null hypothesis even if the true effect is negligible for us, simply due to the virtue of a large sample size, or due to a nonsensical specification of the null hypothesis to begin with.</p>
+<p>Conversely, we might not achieve a statistically significant result, even if the effect size is large, simply because we lack sufficient power due to a small sample size. In fact, small studies with small sample sizes are often a waste of resources simply because they cannot find the effect, even if the effect would be deemed practically relevant.</p>
+<p>A statistically non-significant result is not proof that the null hypothesis is true. That would be assuming that evidence of absence is equivalent to the lack of evidence.</p>
+<p>On the other hand, following Fischer´s original idea of significance testing, if we conduct several well-designed experiments with sufficient power to reject the null hypothesis for a practically meaningful effect size, this has a corroborative meaning. It does not <strong>prove</strong> the null hypothesis, as it cannot be done, but it allows us to place it in the area reserved for well-tested and not rejected hypotheses. It was put into mortal danger and survived from a Popperian perspective.</p>
+<p>As a general rule, statistical significance is necessary for preventing spurious decisions, but it is not sufficient from a practical point of view.</p>
+</section>
+<section id="understanding-p-value" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-p-value">Understanding p-value</h3>
+<p>The p-value is the probability of observed or more extreme data assuming the null hypothesis is true. The counterfactual nature of statistical hypothesis testing can often be confusing. If the null hypothesis is true, p-values are just randomly fluctuating numbers between 0 and 1 (they are uniformly distributed). The p-value is not the probability of the null hypothesis being true (it is or it is not, the probability is thus 1 or 0); that would require a Bayesian approach.</p>
+<p>Additionally, the term <em>borderline significance</em> has begun appearing in published literature suspiciously. It simply means the null hypothesis was not rejected, but it could have been with a different (higher) specification of the <span class="math inline">\(\alpha\)</span> level. But this is a slippery slope, because from the borderline perspective, p-values 0.047 and 0.053 are the same, yet the term is somehow reserved only for the latter.</p>
+</section>
+<section id="attacks-on-p-values-and-statistical-testing-in-general" class="level3">
+<h3 class="anchored" data-anchor-id="attacks-on-p-values-and-statistical-testing-in-general">Attacks on p-values and statistical testing in general</h3>
+<p>The last two decades have seen a significant increase in opposition to p-values, even though most of them appear to be misinterpretations, in my opinion.</p>
+<p>One thing to note is that p-values do not depend solely on the formally expressed null hypotheses, but also on the general “hidden” assumptions, such as the central limit theorem being satisfactory. This is correct, but there is no quantitative inferential procedure that can circumvent this. All of them require some assumptions and are, to some degree, dependent on their fulfillment.</p>
+<p>The largest set of criticism, however, is about something different: dishonesty in the research. Let´s first briefly define two of the most common dishonest techniques (not direct fraud) in hypothesis testing:</p>
+<p><strong>P-hacking</strong> refers to the practice of conducting multiple analyses in an attempt to find <em>statistically significant</em> results. P-hackers use the fact that there is a nonzero error rate to find spurious findings and build their publications (and fame) around these.</p>
+<p><strong>HARKing,</strong> an acronym for Hypothesis After Research Known, is a technique that involves conducting exploratory analysis first and then pretending it was actually confirmatory analysis - a hypothesis test.</p>
+<p>Why do researchers do that? Because they are pressed to publish, and because statistically significant results have a higher chance of being published. The reasoning is that if we refrain from testing, we can address the bias known as publication bias.</p>
+<p>But, this is my personal opinion, we cannot. If we change the game, fraudsters and impostors will find new ways to play it to their advantage. As long as publications and citations are cherished, they will be targeted.</p>
+</section>
+</section>
+<section id="closing-remarks" class="level2">
+<h2 class="anchored" data-anchor-id="closing-remarks">Closing remarks</h2>
+<p>Statistical hypothesis testing is a process that is closely related to the broader concept of hypothesis testing. It is best nested in the critical rationalist approach to science, and there is no need for it to be used for anything other than, well, hypothesis testing. If done correctly, it provides modest yet honest service to those in the business of generating knowledge or making informed decisions.</p>
+<p>This, however, requires following correct and quite strict procedural rules, which are here for our protection. If you want to do it safely, follow them.</p>
+<p>Hypotheses should be prespecified, optimally pre-registered. In the public domain, analysis plans, data, and codes should be shared. Deviations should be honestly discussed. Low-power studies should generally be avoided or at least interpreted with caution.</p>
+<p>Ultimately, it is all about putting the hypotheses, both the null and the alternative, to the test.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
